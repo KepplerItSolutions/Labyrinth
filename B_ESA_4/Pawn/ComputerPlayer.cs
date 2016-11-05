@@ -59,7 +59,7 @@ namespace B_ESA_4.Pawn
             pointsToSearch.Enqueue(new Point(PawnX, PawnY));
             Point addedPoint = new Point(0, 0);
 
-            while (pointsToSearch.Count > 0)
+            while (pointsToSearch.Any())
             {
                 PointExtended p = new PointExtended(pointsToSearch.Dequeue());
                 addedPoint = p.Origin;
@@ -71,9 +71,7 @@ namespace B_ESA_4.Pawn
                     {
                         if (!itemPositions.ContainsKey(p.Up))
                         {
-                            addedPoint = p.Up;
-                            itemPositions.Add(addedPoint, p.Origin);
-                            pointsToSearch.Enqueue(addedPoint);
+                            addedPoint = AddPoint(p.Up, p.Origin);
                         }
                     }
                     // unten
@@ -81,9 +79,7 @@ namespace B_ESA_4.Pawn
                     {
                         if (!itemPositions.ContainsKey(p.Down))
                         {
-                            addedPoint = p.Down;
-                            itemPositions.Add(addedPoint, p.Origin);
-                            pointsToSearch.Enqueue(p.Down);
+                            addedPoint = AddPoint(p.Down, p.Origin);
                         }
                     }
                     // links
@@ -91,9 +87,7 @@ namespace B_ESA_4.Pawn
                     {
                         if (!itemPositions.ContainsKey(p.Left))
                         {
-                            addedPoint = p.Left;
-                            itemPositions.Add(addedPoint, p.Origin);
-                            pointsToSearch.Enqueue(p.Left);
+                            addedPoint = AddPoint(p.Left, p.Origin);
                         }
                     }
                     // rechts
@@ -101,9 +95,7 @@ namespace B_ESA_4.Pawn
                     {
                         if (!itemPositions.ContainsKey(p.Right))
                         {
-                            addedPoint = p.Right;
-                            itemPositions.Add(addedPoint, p.Origin);
-                            pointsToSearch.Enqueue(p.Right);
+                            addedPoint = AddPoint(p.Right, p.Origin);
                         }
                     }
                 }
@@ -113,6 +105,14 @@ namespace B_ESA_4.Pawn
                 }
             }
             CreatePath(new Point(PawnX, PawnY), addedPoint);
+        }
+
+        private Point AddPoint(Point neighborPoint, Point origin)
+        {
+            Point addedPoint = neighborPoint;
+            itemPositions.Add(addedPoint, origin);
+            pointsToSearch.Enqueue(addedPoint);
+            return addedPoint;
         }
 
         private void CreatePath(Point originPoint, Point lastPoint)
