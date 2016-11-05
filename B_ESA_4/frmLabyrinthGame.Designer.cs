@@ -33,6 +33,7 @@
             this.automatikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetLabyrinthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,6 +41,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.labyrinthLadenToolStripMenuItem,
+            this.resetLabyrinthToolStripMenuItem,
             this.automatikToolStripMenuItem,
             this.infoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -78,6 +80,13 @@
             this.autorToolStripMenuItem.Text = "Autor";
             this.autorToolStripMenuItem.Click += new System.EventHandler(this.autorToolStripMenuItem_Click);
             // 
+            // resetLabyrinthToolStripMenuItem
+            // 
+            this.resetLabyrinthToolStripMenuItem.Name = "resetLabyrinthToolStripMenuItem";
+            this.resetLabyrinthToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
+            this.resetLabyrinthToolStripMenuItem.Text = "Reset Labyrinth";
+            this.resetLabyrinthToolStripMenuItem.Click += new System.EventHandler(this.resetLabyrinthToolStripMenuItem_Click);
+            // 
             // frmLabyrinthGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -89,7 +98,6 @@
             this.Name = "frmLabyrinthGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Labyrinth";
-            this.Shown += new System.EventHandler(this.frmLabyrinthGame_Shown);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmLabyrinthGame_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmLabyrinthGame_KeyDown);
             this.menuStrip1.ResumeLayout(false);
@@ -106,6 +114,7 @@
         private System.Windows.Forms.ToolStripMenuItem automatikToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetLabyrinthToolStripMenuItem;
     }
 }
 
