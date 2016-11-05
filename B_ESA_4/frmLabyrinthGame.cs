@@ -16,6 +16,8 @@ namespace B_ESA_4
     public partial class frmLabyrinthGame : Form
     {
         const int FRAMES_PER_SECOND = 60;
+        private const int WS_EX_COMPOSITE_ON = 0x02000000;
+        private const int ONE_SECOND = 1000;
         System.Windows.Forms.Timer renderTimer;
         DataLoader internalDataLoader;
         PlayGround interalPlayground;
@@ -28,7 +30,7 @@ namespace B_ESA_4
             internalPathToFile = pathToFile;
             renderTimer = new Timer()
             {
-                Interval = 1000 / FRAMES_PER_SECOND ,
+                Interval = ONE_SECOND / FRAMES_PER_SECOND ,
                 Enabled = true                               
             };
             renderTimer.Tick += OnRenderFrame;
@@ -45,7 +47,7 @@ namespace B_ESA_4
             get
             {
                 CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+                cp.ExStyle |= WS_EX_COMPOSITE_ON;
                 return cp;
             }
         }
