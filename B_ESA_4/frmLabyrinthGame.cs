@@ -18,6 +18,8 @@ namespace B_ESA_4
         const int FRAMES_PER_SECOND = 60;
         private const int WS_EX_COMPOSITE_ON = 0x02000000;
         private const int ONE_SECOND = 1000;
+        private const string AUTOMATIK = "Automatik";
+        private const string MANUAL = "Manuell";
         System.Windows.Forms.Timer renderTimer;
         DataLoader internalDataLoader;
         PlayGround interalPlayground;
@@ -86,15 +88,15 @@ namespace B_ESA_4
 
             internalPawn.Dispose();
 
-            if (automatikToolStripMenuItem.Text == "Automatik")
+            if (automatikToolStripMenuItem.Text == AUTOMATIK)
             {             
                 internalPawn = new ComputerPlayer(interalPlayground, x, y);
-                automatikToolStripMenuItem.Text = "Manuell";
+                automatikToolStripMenuItem.Text = MANUAL;
             }
             else
             {
                 internalPawn = new ManualMovingPawn(interalPlayground, x, y);
-                automatikToolStripMenuItem.Text = "Automatik";
+                automatikToolStripMenuItem.Text = AUTOMATIK;
             }            
         }
 
