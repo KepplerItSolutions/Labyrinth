@@ -113,13 +113,11 @@ namespace B_ESA_4.Forms
         private void frmLabyrinthGame_Paint(object sender, PaintEventArgs e)
         {
             interalPlayground?.DrawLab(e.Graphics);
-            this.Height = interalPlayground.Height;
-            this.Width = interalPlayground.Width;
         }
 
         private void autorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmAutor().Show();
+            new frmAutor().ShowDialog();
         }
 
         private void resetLabyrinthToolStripMenuItem_Click(object sender, EventArgs e)
@@ -131,7 +129,10 @@ namespace B_ESA_4.Forms
         {
             var lab = internalDataLoader.LoadDataFromFile(internalPathToFile);
             interalPlayground = new PlayGround(lab);
+            this.Height = interalPlayground.Height;
+            this.Width = interalPlayground.Width;
             internalPawn = new ManualMovingPawn(interalPlayground);
+            automatikToolStripMenuItem.Text = AUTOMATIK;
         }
     }
 }
