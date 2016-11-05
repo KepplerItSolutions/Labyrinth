@@ -83,6 +83,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="labyrinth1.dat" />
+    <None Include="labyrinth2.dat" />
+    <None Include="labyrinth3.dat" />
+    <None Include="maze.dat" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
