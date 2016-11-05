@@ -59,7 +59,6 @@
     <Compile Include="Forms\frmLabyrinthGame.Designer.cs">
       <DependentUpon>frmLabyrinthGame.cs</DependentUpon>
     </Compile>
-    <Compile Include="IDataConsumer.cs" />
     <Compile Include="Pawn\ComputerPlayer.cs" />
     <Compile Include="Pawn\IPawn.cs" />
     <Compile Include="Pawn\ManualMovingPawn.cs" />

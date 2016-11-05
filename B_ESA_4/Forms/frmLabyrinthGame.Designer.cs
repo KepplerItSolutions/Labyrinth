@@ -89,7 +89,6 @@
             this.Name = "frmLabyrinthGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Labyrinth";
-            this.Shown += new System.EventHandler(this.frmLabyrinthGame_Shown);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmLabyrinthGame_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmLabyrinthGame_KeyDown);
             this.menuStrip1.ResumeLayout(false);
