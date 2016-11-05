@@ -41,8 +41,7 @@ namespace B_ESA_4.Pawn
         protected void MovePawnAndSetUpPlayground(int lastX, int lastY, int nextX, int nextY)
         {
             internalPlayground.PlaygroundData[lastX, lastY] = string.Empty;
-            internalPlayground.PlaygroundData[nextX, nextY] = Sign;
-            internalPlayground.DrawLab();
+            internalPlayground.PlaygroundData[nextX, nextY] = Sign;          
         }
 
         protected void SetPawnToCenter()
@@ -53,7 +52,6 @@ namespace B_ESA_4.Pawn
             this.PawnX = x;
             this.PawnY = y;
             internalPlayground.PlaygroundData[this.PawnX, this.PawnY] = Sign;
-            internalPlayground.DrawLab();            
         }
 
         private void GetCenterPosition(out int column, out int row)

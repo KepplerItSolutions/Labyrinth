@@ -9,13 +9,11 @@ namespace B_ESA_4
 {
     public class DataLoader
     {
-        IDataConsumer internalDataConsumer;
-        public DataLoader(IDataConsumer dataConsumer)
+        public DataLoader()
         {
-            internalDataConsumer = dataConsumer;
         }
 
-        public void LoadDataFromFile(string pathToFile)
+        public string[,] LoadDataFromFile(string pathToFile)
         {
             string[] result = new string[0];
 
@@ -29,10 +27,10 @@ namespace B_ESA_4
                 result = lines;
                 dataReader.Close();
             }
-            SetDataToPlayGround(result);            
+            return SetDataToPlayGround(result);            
         }
 
-        private void SetDataToPlayGround(string[] rawData)
+        private string[,] SetDataToPlayGround(string[] rawData)
         {
             string[,] playground;
 
@@ -48,7 +46,7 @@ namespace B_ESA_4
                     playground[sign, line - 2] = rawData[line].Substring(sign, 1);
                 }
             }
-            internalDataConsumer.ResetPlayGround(playground);
+            return playground;
         }
     }
 }
