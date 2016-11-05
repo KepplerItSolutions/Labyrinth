@@ -14,19 +14,22 @@ namespace B_ESA_4
         const int offsetColumn = 20;
         const int distanceBetweenSigns = 8;
         const int fontSize = 25;
-    
 
-        public event EventHandler<PlayGroundEnventArgs> ResizeWindowRequest;
         public string[,] PlaygroundData { get; set; }
 
+        public int Width { get { return width; } }
+        int width;
+        public int Height { get { return height; } }
+        int height;
 
         public PlayGround(string[,] playgroundData)
         {
-            PlaygroundData = playgroundData;
+            PlaygroundData = playgroundData;            
         }
 
         public void DrawLab(Graphics internalGraphic)
         {
+            SetSize();
             Bitmap newGraph = new Bitmap(1000, 1000);
             Graphics bitmapGraph = Graphics.FromImage(newGraph);
             internalGraphic.Clear(Color.LightGray);
@@ -80,26 +83,10 @@ namespace B_ESA_4
             return result;
         }
 
-        private void OnResizewindowRequest()
+        private void SetSize()
         {
-            int width = (fontSize + distanceBetweenSigns) * PlaygroundData.GetLength(0) + 3 * offsetColumn;
-            int height = (fontSize + distanceBetweenSigns) * PlaygroundData.GetLength(1) + 4 * offsetRow;
-
-            if (ResizeWindowRequest != null)
-            {
-                ResizeWindowRequest(this, new PlayGroundEnventArgs(width, height));
-            }
+            width = (fontSize + distanceBetweenSigns) * PlaygroundData.GetLength(0) + 3 * offsetColumn;
+            height = (fontSize + distanceBetweenSigns) * PlaygroundData.GetLength(1) + 4 * offsetRow;
         }
-    }
-
-    public class PlayGroundEnventArgs : EventArgs
-    {
-        public PlayGroundEnventArgs(int width, int height)
-        {
-            Width = width;
-            Height = height;
-        }
-        public int Width { get; set; }
-        public int Height { get; set; }
-    }
+    }  
 }

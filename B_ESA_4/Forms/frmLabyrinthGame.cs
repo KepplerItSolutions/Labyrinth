@@ -16,10 +16,10 @@ namespace B_ESA_4.Forms
     public partial class frmLabyrinthGame : Form
     {
         const int FRAMES_PER_SECOND = 60;
-        private const int WS_EX_COMPOSITE_ON = 0x02000000;
-        private const int ONE_SECOND = 1000;
-        private const string AUTOMATIK = "Automatik";
-        private const string MANUAL = "Manuell";
+        const int ONE_SECOND = 1000;
+        const int WS_EX_COMPOSITE_ON = 0x02000000;
+        const string AUTOMATIK = "Automatik";
+        const string MANUAL = "Manuell";
         System.Windows.Forms.Timer renderTimer;
         DataLoader internalDataLoader;
         PlayGround interalPlayground;
@@ -57,12 +57,6 @@ namespace B_ESA_4.Forms
                 cp.ExStyle |= WS_EX_COMPOSITE_ON;
                 return cp;
             }
-        }
-
-        private void InteralPlayground_ResizeWindowRequest(object sender, PlayGroundEnventArgs e)
-        {            
-            this.Height = e.Height;
-            this.Width = e.Width;                   
         }
 
         private void frmLabyrinthGame_KeyDown(object sender, KeyEventArgs e)
@@ -119,6 +113,8 @@ namespace B_ESA_4.Forms
         private void frmLabyrinthGame_Paint(object sender, PaintEventArgs e)
         {
             interalPlayground?.DrawLab(e.Graphics);
+            this.Height = interalPlayground.Height;
+            this.Width = interalPlayground.Width;
         }
 
         private void autorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -133,13 +129,8 @@ namespace B_ESA_4.Forms
 
         private void setLabyrinth()
         {
-            if (interalPlayground != null)
-                interalPlayground.ResizeWindowRequest -= InteralPlayground_ResizeWindowRequest;
-
             var lab = internalDataLoader.LoadDataFromFile(internalPathToFile);
             interalPlayground = new PlayGround(lab);
-            interalPlayground.ResizeWindowRequest += InteralPlayground_ResizeWindowRequest;
-
             internalPawn = new ManualMovingPawn(interalPlayground);
         }
     }
