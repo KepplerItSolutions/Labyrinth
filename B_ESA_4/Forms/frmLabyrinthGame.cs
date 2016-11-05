@@ -28,20 +28,20 @@ namespace B_ESA_4.Forms
 
         public frmLabyrinthGame(string pathToFile)
         {
+            InitializeComponent();
             internalDataLoader = new DataLoader();
             if (!String.IsNullOrWhiteSpace(pathToFile))
             {
-            internalPathToFile = pathToFile;
+                internalPathToFile = pathToFile;
                 setLabyrinth();
             }
 
             renderTimer = new Timer()
             {
-                Interval = ONE_SECOND / FRAMES_PER_SECOND ,
-                Enabled = true                               
+                Interval = ONE_SECOND / FRAMES_PER_SECOND,
+                Enabled = true
             };
             renderTimer.Tick += OnRenderFrame;
-            InitializeComponent();
         }
 
         private void OnRenderFrame(object sender, EventArgs e)
@@ -133,6 +133,11 @@ namespace B_ESA_4.Forms
             this.Width = interalPlayground.Width;
             internalPawn = new ManualMovingPawn(interalPlayground);
             automatikToolStripMenuItem.Text = AUTOMATIK;
+        }
+
+        private void hilfeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmHelp().ShowDialog();
         }
     }
 }

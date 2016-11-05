@@ -34,6 +34,7 @@
             this.automatikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,7 +68,8 @@
             // 
             this.infoToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.infoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.autorToolStripMenuItem});
+            this.autorToolStripMenuItem,
+            this.hilfeToolStripMenuItem});
             this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
             this.infoToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.infoToolStripMenuItem.Text = "Info";
@@ -75,9 +77,16 @@
             // autorToolStripMenuItem
             // 
             this.autorToolStripMenuItem.Name = "autorToolStripMenuItem";
-            this.autorToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.autorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.autorToolStripMenuItem.Text = "Autor";
             this.autorToolStripMenuItem.Click += new System.EventHandler(this.autorToolStripMenuItem_Click);
+            // 
+            // hilfeToolStripMenuItem
+            // 
+            this.hilfeToolStripMenuItem.Name = "hilfeToolStripMenuItem";
+            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hilfeToolStripMenuItem.Text = "Hilfe";
+            this.hilfeToolStripMenuItem.Click += new System.EventHandler(this.hilfeToolStripMenuItem_Click);
             // 
             // frmLabyrinthGame
             // 
@@ -107,6 +116,7 @@
         private System.Windows.Forms.ToolStripMenuItem automatikToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hilfeToolStripMenuItem;
     }
 }
 
