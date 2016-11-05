@@ -8,31 +8,24 @@ using System.Threading.Tasks;
 
 namespace B_ESA_4
 {
-    public class PlayGround : IDataConsumer
+    public class PlayGround 
     {
         const int offsetRow = 20;
         const int offsetColumn = 20;
         const int distanceBetweenSigns = 8;
         const int fontSize = 25;
-
-        Graphics internalGraphic;        
+    
 
         public event EventHandler<PlayGroundEnventArgs> ResizeWindowRequest;
         public string[,] PlaygroundData { get; set; }
 
-        public PlayGround(Graphics graphic)
+
+        public PlayGround(string[,] playgroundData)
         {
-            internalGraphic = graphic;    
-        }
-
-        public void ResetPlayGround(string[,] playgroundData)
-        {            
             PlaygroundData = playgroundData;
-            OnResizewindowRequest();            
-            DrawLab();               
         }
 
-        public void DrawLab()
+        public void DrawLab(Graphics internalGraphic)
         {
             Bitmap newGraph = new Bitmap(1000, 1000);
             Graphics bitmapGraph = Graphics.FromImage(newGraph);
@@ -41,7 +34,7 @@ namespace B_ESA_4
 
             if (!StillContainsItem())
             {
-                PrintEnd();
+                PrintEnd(internalGraphic);
             }
             else
             {
@@ -62,7 +55,7 @@ namespace B_ESA_4
             internalGraphic.DrawImage(newGraph, new PointF(0, 0));
         }
 
-        private void PrintEnd()
+        private void PrintEnd(Graphics internalGraphic)
         {
             internalGraphic.Clear(Color.LightGray);
             Font drawFont = new Font("Arial", fontSize);

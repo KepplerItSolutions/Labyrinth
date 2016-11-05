@@ -15,16 +15,39 @@ namespace B_ESA_4
 {
     public partial class frmLabyrinthGame : Form
     {
-        DataLoader internalData;
+        const int FRAMES_PER_SECOND = 60;
+        System.Windows.Forms.Timer renderTimer;
+        DataLoader internalDataLoader;
         PlayGround interalPlayground;
         IPawn internalPawn;
-        IDataConsumer internalDataConsumer;
         string internalPathToFile;
 
         public frmLabyrinthGame(string pathToFile)
-        {            
+        {
+            internalDataLoader = new DataLoader();
             internalPathToFile = pathToFile;
+            renderTimer = new Timer()
+            {
+                Interval = 1000 / FRAMES_PER_SECOND ,
+                Enabled = true                               
+            };
+            renderTimer.Tick += OnRenderFrame;
             InitializeComponent();
+        }
+
+        private void OnRenderFrame(object sender, EventArgs e)
+        {
+            this.Invalidate();
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+                return cp;
+            }
         }
 
         private void InteralPlayground_ResizeWindowRequest(object sender, PlayGroundEnventArgs e)
@@ -81,22 +104,21 @@ namespace B_ESA_4
             {
                 internalPathToFile = openDialog.FileName;
             }
-            internalData.LoadDataFromFile(internalPathToFile);
+            internalDataLoader.LoadDataFromFile(internalPathToFile);
         }
 
         private void frmLabyrinthGame_Shown(object sender, EventArgs e)
         {
-            interalPlayground = new PlayGround(this.CreateGraphics());
+            var lab = internalDataLoader.LoadDataFromFile(internalPathToFile);
+            interalPlayground = new PlayGround(lab);
             interalPlayground.ResizeWindowRequest += InteralPlayground_ResizeWindowRequest;
-            internalDataConsumer = interalPlayground;
-            internalData = new DataLoader(internalDataConsumer);
-            internalData.LoadDataFromFile(internalPathToFile);
+
             internalPawn = new ManualMovingPawn(interalPlayground);
         }
 
         private void frmLabyrinthGame_Paint(object sender, PaintEventArgs e)
         {
-            interalPlayground.DrawLab();
+            interalPlayground.DrawLab(e.Graphics);
         }
 
         private void autorToolStripMenuItem_Click(object sender, EventArgs e)
