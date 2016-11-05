@@ -18,10 +18,23 @@ namespace B_ESA_4
         { get { return Origin.X; }  }
         public int Y
         { get { return Origin.Y; } }
-        public Point Left { get; set; }
-        public Point Right { get; set; }
-        public Point Up { get; set; }
-        public Point Down { get; set; }
+        public Point Left
+        {
+            get
+            { return new Point(Origin.X - 1, Origin.Y); }
+        }
+        public Point Right
+        {
+            get { return new Point(Origin.X + 1, Origin.Y); }
+        }
+        public Point Up
+        {
+            get { return new Point(Origin.X, Origin.Y - 1); }
+        }
+        public Point Down
+        {
+            get { return new Point(Origin.X, Origin.Y + 1); }
+        }
         public Point Origin { get; set; }
     }
 }
