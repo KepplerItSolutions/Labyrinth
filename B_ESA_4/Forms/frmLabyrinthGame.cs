@@ -139,5 +139,10 @@ namespace B_ESA_4.Forms
         {
             new frmHelp().ShowDialog();
         }
+
+        private void neuStartenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            setLabyrinth();
+        }
     }
 }
