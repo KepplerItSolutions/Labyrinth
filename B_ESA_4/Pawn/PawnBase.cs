@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +39,10 @@ namespace B_ESA_4.Pawn
             return internalPlayground.PlaygroundData[newX, newY] != Wall;
         }
 
+        protected bool CanMove(Point p)
+        {
+            return CanMove(p.X, p.Y);
+        }
         protected void MovePawnAndSetUpPlayground(int lastX, int lastY, int nextX, int nextY)
         {
             internalPlayground.PlaygroundData[lastX, lastY] = string.Empty;

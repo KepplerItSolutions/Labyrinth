@@ -61,49 +61,49 @@ namespace B_ESA_4.Pawn
 
             while (pointsToSearch.Count > 0)
             {
-                Point p = pointsToSearch.Dequeue();
-                addedPoint = p;
+                PointExtended p = new PointExtended(pointsToSearch.Dequeue());
+                addedPoint = p.Origin;
 
                 if (!IsItem(p.X, p.Y))
                 {
                     // oben
-                    if (CanMove(p.X - 1, p.Y))
+                    if (CanMove(p.Up))
                     {
-                        if (!itemPositions.ContainsKey(new Point(p.X - 1, p.Y)))
+                        if (!itemPositions.ContainsKey(p.Up))
                         {
-                            addedPoint = new Point(p.X - 1, p.Y);
-                            itemPositions.Add(addedPoint, new Point(p.X, p.Y));
-                            pointsToSearch.Enqueue(new Point(p.X - 1, p.Y));
+                            addedPoint = p.Up;
+                            itemPositions.Add(addedPoint, p.Origin);
+                            pointsToSearch.Enqueue(addedPoint);
                         }
                     }
                     // unten
-                    if (CanMove(p.X + 1, p.Y))
+                    if (CanMove(p.Down))
                     {
-                        if (!itemPositions.ContainsKey(new Point(p.X + 1, p.Y)))
+                        if (!itemPositions.ContainsKey(p.Down))
                         {
-                            addedPoint = new Point(p.X + 1, p.Y);
-                            itemPositions.Add(addedPoint, new Point(p.X, p.Y));
-                            pointsToSearch.Enqueue(new Point(p.X + 1, p.Y));
+                            addedPoint = p.Down;
+                            itemPositions.Add(addedPoint, p.Origin);
+                            pointsToSearch.Enqueue(p.Down);
                         }
                     }
                     // links
-                    if (CanMove(p.X, p.Y - 1))
+                    if (CanMove(p.Left))
                     {
-                        if (!itemPositions.ContainsKey(new Point(p.X, p.Y - 1)))
+                        if (!itemPositions.ContainsKey(p.Left))
                         {
-                            addedPoint = new Point(p.X, p.Y - 1);
-                            itemPositions.Add(addedPoint, new Point(p.X, p.Y));
-                            pointsToSearch.Enqueue(new Point(p.X, p.Y - 1));
+                            addedPoint = p.Left;
+                            itemPositions.Add(addedPoint, p.Origin);
+                            pointsToSearch.Enqueue(p.Left);
                         }
                     }
                     // rechts
-                    if (CanMove(p.X, p.Y + 1))
+                    if (CanMove(p.Right))
                     {
-                        if (!itemPositions.ContainsKey(new Point(p.X, p.Y + 1)))
+                        if (!itemPositions.ContainsKey(p.Right))
                         {
-                            addedPoint = new Point(p.X, p.Y + 1);
-                            itemPositions.Add(addedPoint, new Point(p.X, p.Y));
-                            pointsToSearch.Enqueue(new Point(p.X, p.Y + 1));
+                            addedPoint = p.Right;
+                            itemPositions.Add(addedPoint, p.Origin);
+                            pointsToSearch.Enqueue(p.Right);
                         }
                     }
                 }

@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace B_ESA_4
+namespace B_ESA_4.Forms
 {
     public partial class frmLabyrinthGame : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace B_ESA_4
+﻿namespace B_ESA_4.Forms
 {
     partial class frmLabyrinthGame
     {
