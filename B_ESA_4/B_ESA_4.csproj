@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="DataLoader.cs" />
     <Compile Include="Forms\frmAutor.cs">
       <SubType>Form</SubType>

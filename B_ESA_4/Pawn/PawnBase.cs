@@ -1,4 +1,5 @@
-﻿using System;
+﻿using B_ESA_4.Common;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -30,13 +31,10 @@ namespace B_ESA_4.Pawn
         }
         public int PawnX { get; set; }
         public int PawnY { get; set; }
-        protected const string Sign = "@";
-        protected const string ItemSign = "o";
-        protected const string Wall = "#";
 
         protected bool CanMove(int newX, int newY)
         {
-            return internalPlayground.PlaygroundData[newX, newY] != Wall;
+            return internalPlayground.PlaygroundData[newX, newY] != CommonConstants.Wall;
         }
 
         protected bool CanMove(Point p)
@@ -46,7 +44,7 @@ namespace B_ESA_4.Pawn
         protected void MovePawnAndSetUpPlayground(int lastX, int lastY, int nextX, int nextY)
         {
             internalPlayground.PlaygroundData[lastX, lastY] = string.Empty;
-            internalPlayground.PlaygroundData[nextX, nextY] = Sign;          
+            internalPlayground.PlaygroundData[nextX, nextY] = CommonConstants.Sign;          
         }
 
         protected void SetPawnToCenter()
@@ -56,7 +54,7 @@ namespace B_ESA_4.Pawn
             GetCenterPosition(out x, out y);
             this.PawnX = x;
             this.PawnY = y;
-            internalPlayground.PlaygroundData[this.PawnX, this.PawnY] = Sign;
+            internalPlayground.PlaygroundData[this.PawnX, this.PawnY] = CommonConstants.Sign;
         }
 
         private void GetCenterPosition(out int column, out int row)

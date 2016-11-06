@@ -1,4 +1,5 @@
-﻿using System;
+﻿using B_ESA_4.Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -27,7 +28,7 @@ namespace B_ESA_4.Pawn
         {
             itemPositions = new Hashtable();
             pointsToSearch = new Queue<Point>();
-            searchTick = new System.Timers.Timer(1000);
+            searchTick = new System.Timers.Timer(10);
             searchTick.Elapsed += SearchTick_Elapsed;
             searchTick.Start();
         }
@@ -128,11 +129,12 @@ namespace B_ESA_4.Pawn
                 fromPoint = (Point)itemPositions[fromPoint];                             
             }
 
-            while (wayFromOrigin.Count > 0)
+            while (wayFromOrigin.Any())
             {
                 Point moveToPoint = wayFromOrigin.Pop();
+
                 MovePawnAndSetUpPlayground(PawnX, PawnY, moveToPoint.X, moveToPoint.Y);
-                Thread.Sleep(350);
+                Thread.Sleep(1000);               
                 PawnX = moveToPoint.X;
                 PawnY = moveToPoint.Y;                
             }
@@ -140,7 +142,7 @@ namespace B_ESA_4.Pawn
 
         private bool IsItem(int x, int y)
         {
-            return internalPlayground.PlaygroundData[x, y] == ItemSign;
+            return internalPlayground.PlaygroundData[x, y] == CommonConstants.ItemSign;
         }
         
         public void MoveUp()

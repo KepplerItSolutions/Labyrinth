@@ -1,4 +1,5 @@
-﻿using B_ESA_4.Forms;
+﻿using B_ESA_4.Common;
+using B_ESA_4.Forms;
 using B_ESA_4.Pawn;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,10 @@ namespace B_ESA_4.Forms
     public partial class frmLabyrinthGame : Form
     {
         const int FRAMES_PER_SECOND = 60;
-        const int ONE_SECOND = 1000;
         const int WS_EX_COMPOSITE_ON = 0x02000000;
         const string AUTOMATIK = "Automatik";
         const string MANUAL = "Manuell";
-        private const string FILE_OPEN_FILTER = "Labyrinth File (*.dat) |*.dat";
+        const string FILE_OPEN_FILTER = "Labyrinth File (*.dat) |*.dat";
         System.Windows.Forms.Timer renderTimer;
         DataLoader internalDataLoader;
         PlayGround interalPlayground;
@@ -36,7 +36,7 @@ namespace B_ESA_4.Forms
 
             renderTimer = new Timer()
             {
-                Interval = ONE_SECOND / FRAMES_PER_SECOND,
+                Interval = CommonConstants.ONE_SECOND / FRAMES_PER_SECOND,
                 Enabled = true
             };
             renderTimer.Tick += OnRenderFrame;

@@ -1,4 +1,5 @@
-﻿using B_ESA_4.Pawn;
+﻿using B_ESA_4.Common;
+using B_ESA_4.Pawn;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,6 +15,8 @@ namespace B_ESA_4
         const int offsetColumn = 20;
         const int distanceBetweenSigns = 8;
         const int fontSize = 25;
+        private const string StandardFont = "Arial";
+        private const string EndText = "Beendet.";
 
         public string[,] PlaygroundData { get; set; }
 
@@ -33,7 +36,7 @@ namespace B_ESA_4
             Bitmap newGraph = new Bitmap(this.Width, this.Height);            
             Graphics bitmapGraph = Graphics.FromImage(newGraph);
             internalGraphic.Clear(Color.LightGray);
-            Font drawFont = new Font("Arial", fontSize);
+            Font drawFont = new Font(StandardFont, fontSize);
 
             if (!StillContainsItem())
             {
@@ -46,8 +49,8 @@ namespace B_ESA_4
                     for (int row = 0; row < PlaygroundData.GetLength(1); row++)
                     {
                         SolidBrush brush = new SolidBrush(Color.Blue);
-                        PlaygroundData[column, row] = PlaygroundData[column, row].Replace('.', 'o');
-                        if (PlaygroundData[column, row] == "#")
+                        PlaygroundData[column, row] = PlaygroundData[column, row].Replace(CommonConstants.Point, CommonConstants.ItemSign);
+                        if (PlaygroundData[column, row] == CommonConstants.Wall)
                         {
                             brush = new SolidBrush(Color.Green);
                         }
@@ -61,10 +64,10 @@ namespace B_ESA_4
         private void PrintEnd(Graphics internalGraphic)
         {
             internalGraphic.Clear(Color.LightGray);
-            Font drawFont = new Font("Arial", fontSize);
+            Font drawFont = new Font(StandardFont, fontSize);
             SolidBrush brush = new SolidBrush(Color.Black);
 
-            internalGraphic.DrawString("Ende. Alle Items beseitigt.", drawFont, brush, new PointF(200, 200));
+            internalGraphic.DrawString(EndText, drawFont, brush, new PointF(50, 50));
         }
 
         public bool StillContainsItem()
@@ -74,7 +77,7 @@ namespace B_ESA_4
             {
                 for (int row = 0; row < PlaygroundData.GetLength(1); row++)
                 {
-                    if (PlaygroundData[column, row] == "o" || PlaygroundData[column, row] == ".")
+                    if (PlaygroundData[column, row] == CommonConstants.ItemSign || PlaygroundData[column, row] == CommonConstants.Point)
                     {
                         result = true;
                     }
