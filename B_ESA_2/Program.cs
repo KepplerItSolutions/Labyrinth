@@ -64,13 +64,17 @@ namespace B_ESA_2
                 Point p = new Point(R.Next(50), R.Next(50));
                 AL.Add(p);
             }
+
+            Console.WriteLine("Zufällig erzeugte Punkte in der ursrpünglichen Reihenfolge.\n(x, y)");
             PrintValues(AL);
             AL.Sort(new PointComparer());
+            Console.WriteLine("Sortiere Punkte.\n(x, y)");
             PrintValues(AL);
+            Console.WriteLine("Sortierrichtlinie: P1 < P2 wenn P1.y < P2.y\nWenn P1.y == P2.y gilt:\nP1 < P2 wenn P1.x < P2.x");
             Console.ReadLine();
         }
 
-        public static void PrintValues(IEnumerable myList)
+        private static void PrintValues(IEnumerable myList)
         {
             foreach (Object obj in myList)
                 Console.WriteLine("{0}", obj);
