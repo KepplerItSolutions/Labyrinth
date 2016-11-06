@@ -43,21 +43,21 @@ namespace B_ESA_4
 
             if (dataToCheck.Length < 3)
             {
-                result = false;
+                return false;
             }
 
             result = int.TryParse(dataToCheck[0], out columns) && int.TryParse(dataToCheck[1], out rows);
 
             if (result && !(dataToCheck.Length == rows + 2))
             {
-                result = false;
+                return false;
             }
 
             for (int i = 2; i < dataToCheck.Length; i++)
             {
                 if (dataToCheck[i].Length != columns)
                 {
-                    result = false;
+                    return false;
                 }
             }
             return result;

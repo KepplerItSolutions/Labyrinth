@@ -113,7 +113,10 @@ namespace B_ESA_4.Forms
 
         private void frmLabyrinthGame_Paint(object sender, PaintEventArgs e)
         {
-            interalPlayground?.DrawLab(e.Graphics);
+            if (interalPlayground != null)
+            {
+                interalPlayground.DrawLab(e.Graphics);
+            }            
         }
 
         private void autorToolStripMenuItem_Click(object sender, EventArgs e)

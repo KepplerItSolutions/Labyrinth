@@ -70,8 +70,7 @@ namespace B_ESA_2
             AL.Sort(new PointComparer());
             Console.WriteLine("Sortiere Punkte.\n(x, y)");
             PrintValues(AL);
-            Console.WriteLine("Sortierrichtlinie: P1 < P2 wenn P1.y < P2.y\nWenn P1.y == P2.y gilt:\nP1 < P2 wenn P1.x < P2.x");
-            Console.ReadLine();
+            Console.WriteLine("Sortierrichtlinie: P1 < P2 wenn P1.y < P2.y\nWenn P1.y == P2.y gilt:\nP1 < P2 wenn P1.x < P2.x");         
         }
 
         private static void PrintValues(IEnumerable myList)

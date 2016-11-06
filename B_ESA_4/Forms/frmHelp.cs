@@ -19,7 +19,7 @@ namespace B_ESA_4.Forms
 
         private void frmHelp_Load(object sender, EventArgs e)
         {
-            richTextBox1.LoadFile(@"C:\temp\Help.rtf");
+            richTextBox1.LoadFile(Application.StartupPath + @"\Help.rtf");
         }
     }
 }
