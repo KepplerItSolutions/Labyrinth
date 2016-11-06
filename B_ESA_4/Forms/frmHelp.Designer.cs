@@ -50,6 +50,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmHelp";
             this.Text = "Hilfe";
+            this.Load += new System.EventHandler(this.frmHelp_Load);
             this.ResumeLayout(false);
 
         }

@@ -70,7 +70,7 @@
     <Compile Include="Pawn\ManualMovingPawn.cs" />
     <Compile Include="Pawn\PawnBase.cs" />
     <Compile Include="PlayGround.cs" />
-    <Compile Include="PointExtended.cs" />
+    <Compile Include="PointExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\frmAutor.resx">

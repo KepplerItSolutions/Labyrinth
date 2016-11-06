@@ -61,41 +61,41 @@ namespace B_ESA_4.Pawn
 
             while (pointsToSearch.Any())
             {
-                PointExtended p = new PointExtended(pointsToSearch.Dequeue());
-                addedPoint = p.Origin;
+                Point p = pointsToSearch.Dequeue();
+                addedPoint = p;
 
                 if (!IsItem(p.X, p.Y))
                 {
                     // oben
-                    if (CanMove(p.Up))
+                    if (CanMove(p.UpperNeighbor()))
                     {
-                        if (!itemPositions.ContainsKey(p.Up))
+                        if (!itemPositions.ContainsKey(p.UpperNeighbor()))
                         {
-                            addedPoint = AddPoint(p.Up, p.Origin);
+                            addedPoint = AddPoint(p.UpperNeighbor(), p);
                         }
                     }
                     // unten
-                    if (CanMove(p.Down))
+                    if (CanMove(p.LowerNeighbor()))
                     {
-                        if (!itemPositions.ContainsKey(p.Down))
+                        if (!itemPositions.ContainsKey(p.LowerNeighbor()))
                         {
-                            addedPoint = AddPoint(p.Down, p.Origin);
+                            addedPoint = AddPoint(p.LowerNeighbor(), p);
                         }
                     }
                     // links
-                    if (CanMove(p.Left))
+                    if (CanMove(p.LeftNeighbor()))
                     {
-                        if (!itemPositions.ContainsKey(p.Left))
+                        if (!itemPositions.ContainsKey(p.LeftNeighbor()))
                         {
-                            addedPoint = AddPoint(p.Left, p.Origin);
+                            addedPoint = AddPoint(p.LeftNeighbor(), p);
                         }
                     }
                     // rechts
-                    if (CanMove(p.Right))
+                    if (CanMove(p.RightNeighbor()))
                     {
-                        if (!itemPositions.ContainsKey(p.Right))
+                        if (!itemPositions.ContainsKey(p.RightNeighbor()))
                         {
-                            addedPoint = AddPoint(p.Right, p.Origin);
+                            addedPoint = AddPoint(p.RightNeighbor(), p);
                         }
                     }
                 }

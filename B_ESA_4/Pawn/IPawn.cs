@@ -12,6 +12,8 @@ namespace B_ESA_4.Pawn
         void MoveDown();
         void MoveLeft();
         void MoveRight();
-        void Dispose();       
+        void Dispose();  
+        int PawnX { get; set; }
+        int PawnY { get; set; }
     }
 }

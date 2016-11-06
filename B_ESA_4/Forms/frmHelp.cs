@@ -16,5 +16,10 @@ namespace B_ESA_4.Forms
         {
             InitializeComponent();
         }
+
+        private void frmHelp_Load(object sender, EventArgs e)
+        {
+            richTextBox1.LoadFile(@"C:\temp\Help.rtf");
+        }
     }
 }

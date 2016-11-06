@@ -30,7 +30,7 @@ namespace B_ESA_4
 
         public void DrawLab(Graphics internalGraphic)
         {            
-            Bitmap newGraph = new Bitmap(this.Width, this.Height);
+            Bitmap newGraph = new Bitmap(this.Width, this.Height);            
             Graphics bitmapGraph = Graphics.FromImage(newGraph);
             internalGraphic.Clear(Color.LightGray);
             Font drawFont = new Font("Arial", fontSize);

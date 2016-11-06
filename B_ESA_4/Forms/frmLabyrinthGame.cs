@@ -20,6 +20,7 @@ namespace B_ESA_4.Forms
         const int WS_EX_COMPOSITE_ON = 0x02000000;
         const string AUTOMATIK = "Automatik";
         const string MANUAL = "Manuell";
+        private const string FILE_OPEN_FILTER = "Labyrinth File (*.dat) |*.dat";
         System.Windows.Forms.Timer renderTimer;
         DataLoader internalDataLoader;
         PlayGround interalPlayground;
@@ -30,11 +31,8 @@ namespace B_ESA_4.Forms
         {
             InitializeComponent();
             internalDataLoader = new DataLoader();
-            if (!String.IsNullOrWhiteSpace(pathToFile))
-            {
-                internalPathToFile = pathToFile;
-                setLabyrinth();
-            }
+            internalPathToFile = pathToFile;
+            setLabyrinth();
 
             renderTimer = new Timer()
             {
@@ -82,27 +80,30 @@ namespace B_ESA_4.Forms
 
         private void automatikToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int x = ((PawnBase)internalPawn).PawnX;
-            int y = ((PawnBase)internalPawn).PawnY;
-
-            internalPawn?.Dispose();
-
-            if (automatikToolStripMenuItem.Text == AUTOMATIK)
-            {             
-                internalPawn = new ComputerPlayer(interalPlayground, x, y);
-                automatikToolStripMenuItem.Text = MANUAL;
-            }
-            else
+            if (internalPawn != null)
             {
-                internalPawn = new ManualMovingPawn(interalPlayground, x, y);
-                automatikToolStripMenuItem.Text = AUTOMATIK;
-            }            
+                int x = internalPawn.PawnX;
+                int y = internalPawn.PawnY;
+
+                internalPawn.Dispose();
+
+                if (automatikToolStripMenuItem.Text == AUTOMATIK)
+                {
+                    internalPawn = new ComputerPlayer(interalPlayground, x, y);
+                    automatikToolStripMenuItem.Text = MANUAL;
+                }
+                else
+                {
+                    internalPawn = new ManualMovingPawn(interalPlayground, x, y);
+                    automatikToolStripMenuItem.Text = AUTOMATIK;
+                }             
+            }
         }
 
         private void labyrinthLadenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openDialog = new OpenFileDialog();
-
+            openDialog.Filter = FILE_OPEN_FILTER;
             if (openDialog.ShowDialog() == DialogResult.OK)
             {
                 internalPathToFile = openDialog.FileName;
@@ -120,19 +121,24 @@ namespace B_ESA_4.Forms
             new frmAutor().ShowDialog();
         }
 
-        private void resetLabyrinthToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            setLabyrinth();
-        }
-
         private void setLabyrinth()
         {
-            var lab = internalDataLoader.LoadDataFromFile(internalPathToFile);
-            interalPlayground = new PlayGround(lab);
-            this.Height = interalPlayground.Height;
-            this.Width = interalPlayground.Width;
-            internalPawn = new ManualMovingPawn(interalPlayground);
-            automatikToolStripMenuItem.Text = AUTOMATIK;
+            if (!String.IsNullOrWhiteSpace(internalPathToFile))
+            {
+                var lab = internalDataLoader.LoadDataFromFile(internalPathToFile);
+                if (lab != null)
+                {
+                    interalPlayground = new PlayGround(lab);
+                    this.Height = interalPlayground.Height;
+                    this.Width = interalPlayground.Width;
+                    internalPawn = new ManualMovingPawn(interalPlayground);
+                    automatikToolStripMenuItem.Text = AUTOMATIK;
+                }
+                else
+                {
+                    internalPathToFile = String.Empty;
+                }
+            }
         }
 
         private void hilfeToolStripMenuItem_Click(object sender, EventArgs e)

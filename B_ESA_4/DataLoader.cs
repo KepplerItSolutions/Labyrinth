@@ -27,7 +27,40 @@ namespace B_ESA_4
                 result = lines;
                 dataReader.Close();
             }
-            return SetDataToPlayGround(result);            
+            if (IsCorrectFormat(result))
+            {
+                return SetDataToPlayGround(result);
+            }
+            System.Windows.Forms.MessageBox.Show("Das Format der angegebnene Datei ist nicht korrekt");
+            return null;          
+        }
+
+        private bool IsCorrectFormat(string[] dataToCheck)
+        {
+            bool result = true;
+            int rows = 0;
+            int columns = 0;
+
+            if (dataToCheck.Length < 3)
+            {
+                result = false;
+            }
+
+            result = int.TryParse(dataToCheck[0], out columns) && int.TryParse(dataToCheck[1], out rows);
+
+            if (result && !(dataToCheck.Length == rows + 2))
+            {
+                result = false;
+            }
+
+            for (int i = 2; i < dataToCheck.Length; i++)
+            {
+                if (dataToCheck[i].Length != columns)
+                {
+                    result = false;
+                }
+            }
+            return result;
         }
 
         private string[,] SetDataToPlayGround(string[] rawData)
