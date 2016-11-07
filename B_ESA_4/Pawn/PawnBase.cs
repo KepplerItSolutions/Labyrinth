@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using B_ESA_4.Common;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -27,6 +26,11 @@ namespace B_ESA_4.Pawn
             InitPawn(playground);
             Location = new Point(x, y);
         }
+        public int PawnX { get; set; }
+        public int PawnY { get; set; }
+        protected const string Sign = "@";
+        protected const string ItemSign = "o";
+        protected const string Wall = "#";
 
         public Point Location { get; set; }
 

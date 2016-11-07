@@ -1,14 +1,7 @@
-﻿using B_ESA_4.Forms;
+﻿using B_ESA_4.Common;
 using B_ESA_4.Pawn;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using B_ESA_4.Playground;
 
@@ -17,10 +10,10 @@ namespace B_ESA_4.Forms
     public partial class frmLabyrinthGame : Form
     {
         const int FRAMES_PER_SECOND = 60;
-        const int ONE_SECOND = 1000;
         const int WS_EX_COMPOSITE_ON = 0x02000000;
         const string AUTOMATIK = "Automatik";
         const string MANUAL = "Manuell";
+        const string FILE_OPEN_FILTER = "Labyrinth File (*.dat) |*.dat";
         System.Windows.Forms.Timer renderTimer;
         DataLoader internalDataLoader;
         PlayGround interalPlayground;
@@ -29,20 +22,17 @@ namespace B_ESA_4.Forms
 
         public frmLabyrinthGame(string pathToFile)
         {
+            InitializeComponent();
             internalDataLoader = new DataLoader();
-            if (!String.IsNullOrWhiteSpace(pathToFile))
-            {
             internalPathToFile = pathToFile;
-                setLabyrinth();
-            }
+            setLabyrinth();
 
             renderTimer = new Timer()
             {
-                Interval = ONE_SECOND / FRAMES_PER_SECOND ,
-                Enabled = true                               
+                Interval = CommonConstants.ONE_SECOND / FRAMES_PER_SECOND,
+                Enabled = true
             };
             renderTimer.Tick += OnRenderFrame;
-            InitializeComponent();
         }
 
         private void OnRenderFrame(object sender, EventArgs e)
@@ -83,27 +73,30 @@ namespace B_ESA_4.Forms
 
         private void automatikToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int x = ((PawnBase)internalPawn).PawnX;
-            int y = ((PawnBase)internalPawn).PawnY;
-
-            internalPawn?.Dispose();
-
-            if (automatikToolStripMenuItem.Text == AUTOMATIK)
-            {             
-                internalPawn = new ComputerPlayer(interalPlayground, x, y);
-                automatikToolStripMenuItem.Text = MANUAL;
-            }
-            else
+            if (internalPawn != null)
             {
-                internalPawn = new ManualMovingPawn(interalPlayground, x, y);
-                automatikToolStripMenuItem.Text = AUTOMATIK;
-            }            
+                int x = internalPawn.PawnX;
+                int y = internalPawn.PawnY;
+
+                internalPawn.Dispose();
+
+                if (automatikToolStripMenuItem.Text == AUTOMATIK)
+                {
+                    internalPawn = new ComputerPlayer(interalPlayground, x, y);
+                    automatikToolStripMenuItem.Text = MANUAL;
+                }
+                else
+                {
+                    internalPawn = new ManualMovingPawn(interalPlayground, x, y);
+                    automatikToolStripMenuItem.Text = AUTOMATIK;
+                }             
+            }
         }
 
         private void labyrinthLadenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openDialog = new OpenFileDialog();
-
+            openDialog.Filter = FILE_OPEN_FILTER;
             if (openDialog.ShowDialog() == DialogResult.OK)
             {
                 internalPathToFile = openDialog.FileName;
@@ -118,21 +111,19 @@ namespace B_ESA_4.Forms
             this.Width = interalPlayground.Width;
         }
 
-        private void autorToolStripMenuItem_Click(object sender, EventArgs e)
+        private void hilfeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmAutor().Show();
+            new frmHelp().ShowDialog();
         }
 
-        private void resetLabyrinthToolStripMenuItem_Click(object sender, EventArgs e)
+        private void neuStartenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             setLabyrinth();
         }
 
-        private void setLabyrinth()
+        private void frmLabyrinthGame_Load(object sender, EventArgs e)
         {
-            var lab = internalDataLoader.LoadDataFromFile(internalPathToFile);
-            interalPlayground = new PlayGround(lab);
-            internalPawn = new ManualMovingPawn(interalPlayground);
+            this.Icon = Icon.GetKepplerIcon(Application.StartupPath);
         }
     }
 }
