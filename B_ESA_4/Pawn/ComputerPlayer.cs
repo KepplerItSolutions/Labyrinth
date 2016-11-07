@@ -68,62 +68,52 @@ namespace B_ESA_4.Pawn
                 if (!IsItem(p.X, p.Y))
                 {
                     // oben
-                    if (CanMove(p.UpperNeighbor()))
+                    if (CanMove(p.UpperNeighbor()) && !itemPositions.ContainsKey(p.UpperNeighbor()))
                     {
-                        if (!itemPositions.ContainsKey(p.UpperNeighbor()))
-                        {
-                            addedPoint = AddPoint(p.UpperNeighbor(), p);
-                        }
+                        addedPoint = p.UpperNeighbor();
+                        AddPoint(addedPoint, p);
                     }
                     // unten
-                    if (CanMove(p.LowerNeighbor()))
+                    if (CanMove(p.LowerNeighbor()) && !itemPositions.ContainsKey(p.LowerNeighbor()))
                     {
-                        if (!itemPositions.ContainsKey(p.LowerNeighbor()))
-                        {
-                            addedPoint = AddPoint(p.LowerNeighbor(), p);
-                        }
+                        addedPoint = p.LowerNeighbor();
+                        AddPoint(addedPoint, p);
                     }
                     // links
-                    if (CanMove(p.LeftNeighbor()))
+                    if (CanMove(p.LeftNeighbor()) && !itemPositions.ContainsKey(p.LeftNeighbor()))
                     {
-                        if (!itemPositions.ContainsKey(p.LeftNeighbor()))
-                        {
-                            addedPoint = AddPoint(p.LeftNeighbor(), p);
-                        }
+                        addedPoint = p.LeftNeighbor();
+                        AddPoint(addedPoint, p);
                     }
                     // rechts
-                    if (CanMove(p.RightNeighbor()))
+                    if (CanMove(p.RightNeighbor()) && !itemPositions.ContainsKey(p.RightNeighbor()))
                     {
-                        if (!itemPositions.ContainsKey(p.RightNeighbor()))
-                        {
-                            addedPoint = AddPoint(p.RightNeighbor(), p);
-                        }
+                        addedPoint = p.RightNeighbor();
+                        AddPoint(addedPoint, p);
                     }
                 }
                 else
                 {
+                    CreatePath(new Point(PawnX, PawnY), addedPoint);
                     break;
                 }
-            }
-            CreatePath(new Point(PawnX, PawnY), addedPoint);
+            }            
         }
 
-        private Point AddPoint(Point neighborPoint, Point origin)
-        {
-            Point addedPoint = neighborPoint;
-            itemPositions.Add(addedPoint, origin);
-            pointsToSearch.Enqueue(addedPoint);
-            return addedPoint;
+        private void AddPoint(Point neighborPoint, Point origin)
+        {            
+            itemPositions.Add(neighborPoint, origin);
+            pointsToSearch.Enqueue(neighborPoint);         
         }
 
-        private void CreatePath(Point originPoint, Point lastPoint)
+        private void CreatePath(Point pawnPosition, Point itemPosition)
         {
             Stack<Point> wayFromOrigin = new Stack<Point>();
 
-            wayFromOrigin.Push(lastPoint);
-            Point fromPoint = (Point)itemPositions[lastPoint];
+            wayFromOrigin.Push(itemPosition);
+            Point fromPoint = (Point)itemPositions[itemPosition];
 
-            while (fromPoint != originPoint)
+            while (fromPoint != pawnPosition)
             {
                 wayFromOrigin.Push(fromPoint);                
                 fromPoint = (Point)itemPositions[fromPoint];                             
