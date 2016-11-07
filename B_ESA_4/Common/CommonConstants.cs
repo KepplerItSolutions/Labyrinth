@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace B_ESA_4.Common
+﻿namespace B_ESA_4.Common
 {
     public static class CommonConstants
     {
@@ -12,6 +6,6 @@ namespace B_ESA_4.Common
         public const string Sign = "@";
         public const string ItemSign = "o";
         public const string Wall = "#";
-        public const string Point = ".";
+        public const string Point = ".";        
     }
 }

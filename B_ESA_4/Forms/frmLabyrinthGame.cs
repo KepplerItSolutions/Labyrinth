@@ -1,15 +1,7 @@
 ﻿using B_ESA_4.Common;
-using B_ESA_4.Forms;
 using B_ESA_4.Pawn;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace B_ESA_4.Forms
@@ -152,6 +144,11 @@ namespace B_ESA_4.Forms
         private void neuStartenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             setLabyrinth();
+        }
+
+        private void frmLabyrinthGame_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.GetKepplerIcon(Application.StartupPath);
         }
     }
 }

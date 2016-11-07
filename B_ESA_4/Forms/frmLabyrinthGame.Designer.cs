@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLabyrinthGame));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.labyrinthLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.automatikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,14 +78,14 @@
             // autorToolStripMenuItem
             // 
             this.autorToolStripMenuItem.Name = "autorToolStripMenuItem";
-            this.autorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.autorToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
             this.autorToolStripMenuItem.Text = "Autor";
             this.autorToolStripMenuItem.Click += new System.EventHandler(this.autorToolStripMenuItem_Click);
             // 
             // hilfeToolStripMenuItem
             // 
             this.hilfeToolStripMenuItem.Name = "hilfeToolStripMenuItem";
-            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
             this.hilfeToolStripMenuItem.Text = "Hilfe";
             this.hilfeToolStripMenuItem.Click += new System.EventHandler(this.hilfeToolStripMenuItem_Click);
             // 
@@ -104,11 +103,11 @@
             this.ClientSize = new System.Drawing.Size(655, 474);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmLabyrinthGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Labyrinth";
+            this.Load += new System.EventHandler(this.frmLabyrinthGame_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmLabyrinthGame_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmLabyrinthGame_KeyDown);
             this.menuStrip1.ResumeLayout(false);

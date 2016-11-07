@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using B_ESA_4.Common;
+using System.IO;
 
 namespace B_ESA_4.Forms
 {
@@ -15,6 +11,24 @@ namespace B_ESA_4.Forms
         public frmAutor()
         {
             InitializeComponent();
+        }
+
+        private void frmAutor_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.GetKepplerIcon(Application.StartupPath);
+
+            string impressum = Application.StartupPath + "\\Impressum.png";
+            string slogan = Application.StartupPath + "\\SloganMitIconTransparentCCD - ohne we're.png";
+
+            if (File.Exists(impressum))
+            {
+                pictureBox1.Image = Image.FromFile(impressum);
+            }
+
+            if (File.Exists(slogan))
+            {
+                pictureBox2.Image = Image.FromFile(slogan);
+            }            
         }
     }
 }

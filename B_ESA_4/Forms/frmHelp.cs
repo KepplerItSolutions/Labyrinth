@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using B_ESA_4.Common;
+using System.IO;
 
 namespace B_ESA_4.Forms
 {
@@ -19,7 +15,17 @@ namespace B_ESA_4.Forms
 
         private void frmHelp_Load(object sender, EventArgs e)
         {
-            richTextBox1.LoadFile(Application.StartupPath + @"\Help.rtf");
+            string help = Application.StartupPath + @"\Help.rtf";
+
+            if (File.Exists(help))
+            {
+                richTextBox1.LoadFile(help);
+            }
+            else
+            {
+                richTextBox1.Text = "Hilfedatei nicht gefunden.\nPfad: " + help;
+            }
+            this.Icon = Icon.GetKepplerIcon(Application.StartupPath);
         }
     }
 }
