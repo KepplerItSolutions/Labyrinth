@@ -4,22 +4,19 @@ namespace B_ESA_4.Playground
 {
     public class PlayGround 
     {
-        private readonly PlaygroundVisual _playgroundVisual;
-
         private string[,] _playgroundData { get; set; }
 
         public int Width { get; private set; }
         public int Height { get; private set; }
 
-        public PlaygroundVisual PlaygroundVisual
-        {
-            get { return _playgroundVisual; }
-        }
+        public PlaygroundVisual PlaygroundVisual { get; }
 
         public PlayGround(string[,] playgroundData)
         {
             _playgroundData = playgroundData;
-            _playgroundVisual = new PlaygroundVisual(this);
+            Width = _playgroundData.GetLength(0);
+            Height = _playgroundData.GetLength(1);
+            PlaygroundVisual = new PlaygroundVisual(this);
         }
 
         public bool StillContainsItem()
@@ -41,6 +38,7 @@ namespace B_ESA_4.Playground
         public Field this[Point location]
         {
             get { return new EmptyField(); }
+            set { throw new System.NotImplementedException(); }
         }
 
         public Field this[int x, int y]

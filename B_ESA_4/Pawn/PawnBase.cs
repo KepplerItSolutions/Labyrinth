@@ -43,10 +43,14 @@ namespace B_ESA_4.Pawn
         {
             return CanMove(p.X, p.Y);
         }
-        protected void MovePawnAndSetUpPlayground(Point last, Point next)
+        protected Point MovePawnAndSetUpPlayground(Point last, Point next)
         {
-            internalPlayground[last] = new EmptyField() { Location = last};
-            internalPlayground[next] = new PlayerField() {Location = next};          
+            if (!CanMove(next))
+                return last;
+
+            internalPlayground[last] = new EmptyField() {Location = last};
+            internalPlayground[next] = new PlayerField() {Location = next};
+            return next;
         }
     }
 }

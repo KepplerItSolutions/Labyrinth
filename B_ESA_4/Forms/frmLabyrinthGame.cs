@@ -107,8 +107,6 @@ namespace B_ESA_4.Forms
         private void frmLabyrinthGame_Paint(object sender, PaintEventArgs e)
         {
             interalPlayground.PlaygroundVisual?.DrawLab(e.Graphics);
-            this.Height = interalPlayground.Height;
-            this.Width = interalPlayground.Width;
         }
 
         private void hilfeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -120,10 +118,22 @@ namespace B_ESA_4.Forms
         {
             setLabyrinth();
         }
+        private void autorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmAutor().Show();
+        }
 
         private void frmLabyrinthGame_Load(object sender, EventArgs e)
         {
             this.Icon = Icon.GetKepplerIcon(Application.StartupPath);
+        }
+        private void setLabyrinth()
+        {
+            var lab = internalDataLoader.LoadDataFromFile(internalPathToFile);
+            interalPlayground = new PlayGround(lab);
+            internalPawn = new ManualMovingPawn(interalPlayground);
+            this.Height = interalPlayground.PlaygroundVisual?.Size.Height ?? this.Height;
+            this.Width = interalPlayground.PlaygroundVisual?.Size.Width ?? this.Width;
         }
     }
 }

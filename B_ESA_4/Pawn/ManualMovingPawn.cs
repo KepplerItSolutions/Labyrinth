@@ -23,38 +23,22 @@ namespace B_ESA_4.Pawn
 
         public void MoveUp()
         {
-            if (CanMove(this.PawnX, this.PawnY - 1))
-            {
-                MovePawnAndSetUpPlayground(this.PawnX, this.PawnY, this.PawnX, this.PawnY - 1);
-                this.PawnY--;
-            }
+            Location = MovePawnAndSetUpPlayground(Location, Location.UpperNeighbour());
         }
 
         public void MoveDown()
         {
-            if (CanMove(this.PawnX, this.PawnY + 1))
-            {
-                MovePawnAndSetUpPlayground(this.PawnX, this.PawnY, this.PawnX, this.PawnY + 1);
-                this.PawnY++;
-            }
+            Location = MovePawnAndSetUpPlayground(Location, Location.LowerNeighbour());
         }
 
         public void MoveLeft()
         {
-            if (CanMove(this.PawnX - 1, this.PawnY))
-            {
-                MovePawnAndSetUpPlayground(this.PawnX, this.PawnY, this.PawnX - 1, this.PawnY);
-                this.PawnX--;
-            }
+            Location = MovePawnAndSetUpPlayground(Location, Location.LeftNeighbour());
         }
 
         public void MoveRight()
         {
-            if (CanMove(this.PawnX + 1, this.PawnY))
-            {
-                MovePawnAndSetUpPlayground(this.PawnX, this.PawnY, this.PawnX + 1, this.PawnY);
-                this.PawnX++;
-            }
+            Location = MovePawnAndSetUpPlayground(Location, Location.RightNeighbour());
         }
 
         public void Dispose()

@@ -64,10 +64,10 @@ namespace B_ESA_4.Pawn
 
                 if (!IsItem(p))
                 {
-                    var upperNeighbour = p.UpperNeighbor();
-                    var lowerNeighbour = p.LowerNeighbor();
-                    var leftNeighbour = p.LeftNeighbor();
-                    var rightNeighbour = p.RightNeighbor();
+                    var upperNeighbour = p.UpperNeighbour();
+                    var lowerNeighbour = p.LowerNeighbour();
+                    var leftNeighbour = p.LeftNeighbour();
+                    var rightNeighbour = p.RightNeighbour();
 
                     if (CanMove(upperNeighbour))
                     {
@@ -127,7 +127,7 @@ namespace B_ESA_4.Pawn
             {
                 Point moveToPoint = wayFromOrigin.Pop();
 
-                MovePawnAndSetUpPlayground(PawnX, PawnY, moveToPoint.X, moveToPoint.Y);
+                MovePawnAndSetUpPlayground(Location, moveToPoint);
                 Thread.Sleep(1000);
                 PawnX = moveToPoint.X;
                 PawnY = moveToPoint.Y;
@@ -136,7 +136,7 @@ namespace B_ESA_4.Pawn
 
         private bool IsItem(Point p)
         {
-            return internalPlayground.PlaygroundData[p.X, p.Y] == CommonConstants.ItemSign;
+            return internalPlayground[p] is ItemField;
         }
 
         public void MoveUp()
