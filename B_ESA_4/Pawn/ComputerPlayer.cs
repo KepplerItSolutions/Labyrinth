@@ -1,12 +1,12 @@
-﻿using System;
+﻿using B_ESA_4.Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Timers;
+using B_ESA_4.Playground;
 
 namespace B_ESA_4.Pawn
 {
@@ -27,7 +27,7 @@ namespace B_ESA_4.Pawn
         {
             itemPositions = new Hashtable();
             pointsToSearch = new Queue<Point>();
-            searchTick = new System.Timers.Timer(1000);
+            searchTick = new System.Timers.Timer(10);
             searchTick.Elapsed += SearchTick_Elapsed;
             searchTick.Start();
         }
@@ -46,103 +46,99 @@ namespace B_ESA_4.Pawn
                 if (!internalPlayground.StillContainsItem())
                 {
                     searchTick.Stop();
-                }                
+                }
                 SearchItems();
                 searching = false;
-            }            
+            }
         }
 
         private void SearchItems()
         {
             itemPositions.Clear();
             pointsToSearch.Clear();
-            pointsToSearch.Enqueue(new Point(PawnX, PawnY));
-            Point addedPoint = new Point(0, 0);
+            pointsToSearch.Enqueue(Location);
 
-            while (pointsToSearch.Count > 0)
+            while (pointsToSearch.Any())
             {
-                PointExtended p = new PointExtended(pointsToSearch.Dequeue());
-                addedPoint = p.Origin;
+                Point p = pointsToSearch.Dequeue();
 
-                if (!IsItem(p.X, p.Y))
+                if (!IsItem(p))
                 {
-                    // oben
-                    if (CanMove(p.Up))
+                    var upperNeighbour = p.UpperNeighbor();
+                    var lowerNeighbour = p.LowerNeighbor();
+                    var leftNeighbour = p.LeftNeighbor();
+                    var rightNeighbour = p.RightNeighbor();
+
+                    if (CanMove(upperNeighbour))
                     {
-                        if (!itemPositions.ContainsKey(p.Up))
-                        {
-                            addedPoint = p.Up;
-                            itemPositions.Add(addedPoint, p.Origin);
-                            pointsToSearch.Enqueue(addedPoint);
-                        }
+                        AddPointIfNotExistent(upperNeighbour, p);
                     }
-                    // unten
-                    if (CanMove(p.Down))
+
+                    if (CanMove(lowerNeighbour))
                     {
-                        if (!itemPositions.ContainsKey(p.Down))
-                        {
-                            addedPoint = p.Down;
-                            itemPositions.Add(addedPoint, p.Origin);
-                            pointsToSearch.Enqueue(p.Down);
-                        }
+                        AddPointIfNotExistent(lowerNeighbour, p);
                     }
-                    // links
-                    if (CanMove(p.Left))
+
+                    if (CanMove(leftNeighbour))
                     {
-                        if (!itemPositions.ContainsKey(p.Left))
-                        {
-                            addedPoint = p.Left;
-                            itemPositions.Add(addedPoint, p.Origin);
-                            pointsToSearch.Enqueue(p.Left);
-                        }
+                        AddPointIfNotExistent(leftNeighbour, p);
                     }
-                    // rechts
-                    if (CanMove(p.Right))
+
+                    if (CanMove(rightNeighbour))
                     {
-                        if (!itemPositions.ContainsKey(p.Right))
-                        {
-                            addedPoint = p.Right;
-                            itemPositions.Add(addedPoint, p.Origin);
-                            pointsToSearch.Enqueue(p.Right);
-                        }
+                        AddPointIfNotExistent(rightNeighbour, p);
                     }
                 }
                 else
                 {
+                    CreatePath(p);
                     break;
                 }
             }
-            CreatePath(new Point(PawnX, PawnY), addedPoint);
         }
 
-        private void CreatePath(Point originPoint, Point lastPoint)
+        private void AddPointIfNotExistent(Point neighborPoint, Point origin)
+        {
+            if (itemPositions.ContainsKey(neighborPoint))
+                return;
+            AddPoint(neighborPoint, origin);
+        }
+
+        private void AddPoint(Point neighborPoint, Point origin)
+        {
+            itemPositions.Add(neighborPoint, origin);
+            pointsToSearch.Enqueue(neighborPoint);
+        }
+
+        private void CreatePath(Point itemPosition)
         {
             Stack<Point> wayFromOrigin = new Stack<Point>();
 
-            wayFromOrigin.Push(lastPoint);
-            Point fromPoint = (Point)itemPositions[lastPoint];
+            wayFromOrigin.Push(itemPosition);
+            Point fromPoint = (Point)itemPositions[itemPosition];
 
-            while (fromPoint != originPoint)
+            while (itemPositions.ContainsKey(fromPoint))
             {
-                wayFromOrigin.Push(fromPoint);                
-                fromPoint = (Point)itemPositions[fromPoint];                             
+                fromPoint = (Point)itemPositions[fromPoint];
+                wayFromOrigin.Push(fromPoint);
             }
 
-            while (wayFromOrigin.Count > 0)
+            while (wayFromOrigin.Any())
             {
                 Point moveToPoint = wayFromOrigin.Pop();
+
                 MovePawnAndSetUpPlayground(PawnX, PawnY, moveToPoint.X, moveToPoint.Y);
-                Thread.Sleep(350);
+                Thread.Sleep(1000);
                 PawnX = moveToPoint.X;
-                PawnY = moveToPoint.Y;                
+                PawnY = moveToPoint.Y;
             }
         }
 
-        private bool IsItem(int x, int y)
+        private bool IsItem(Point p)
         {
-            return internalPlayground.PlaygroundData[x, y] == ItemSign;
+            return internalPlayground.PlaygroundData[p.X, p.Y] == CommonConstants.ItemSign;
         }
-        
+
         public void MoveUp()
         {
         }
@@ -152,19 +148,19 @@ namespace B_ESA_4.Pawn
         }
 
         public void MoveLeft()
-        {            
+        {
         }
 
         public void MoveRight()
-        {         
+        {
         }
 
         public void Dispose()
-        {            
+        {
             searchTick.Elapsed -= SearchTick_Elapsed;
             searchTick.Stop();
-            searchTick = null;         
+            searchTick = null;
         }
     }
-    
+
 }

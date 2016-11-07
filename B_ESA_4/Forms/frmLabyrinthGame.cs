@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using B_ESA_4.Playground;
 
 namespace B_ESA_4.Forms
 {
@@ -112,7 +113,7 @@ namespace B_ESA_4.Forms
 
         private void frmLabyrinthGame_Paint(object sender, PaintEventArgs e)
         {
-            interalPlayground?.DrawLab(e.Graphics);
+            interalPlayground.PlaygroundVisual?.DrawLab(e.Graphics);
             this.Height = interalPlayground.Height;
             this.Width = interalPlayground.Width;
         }
