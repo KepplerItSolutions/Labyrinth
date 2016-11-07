@@ -1,4 +1,5 @@
-﻿using System;
+﻿using B_ESA_4.Playground;
+using System;
 using System.IO;
 
 namespace B_ESA_4
@@ -9,7 +10,7 @@ namespace B_ESA_4
         {
         }
 
-        public string[,] LoadDataFromFile(string pathToFile)
+        public Field[,] LoadDataFromFile(string pathToFile)
         {
             string[] result = new string[0];
 
@@ -23,6 +24,7 @@ namespace B_ESA_4
                 result = lines;
                 dataReader.Close();
             }
+
             if (IsCorrectFormat(result))
             {
                 return SetDataToPlayGround(result);
@@ -59,20 +61,37 @@ namespace B_ESA_4
             return result;
         }
 
-        private string[,] SetDataToPlayGround(string[] rawData)
+        private Field[,] SetDataToPlayGround(string[] rawData)
         {
-            string[,] playground;
 
             int rows = int.Parse(rawData[1]);
             int columns = int.Parse(rawData[0]);
 
-            playground = new string[columns, rows];
+            Field[,] playground = new Field[columns, rows];
 
             for (int line = 2; line < rows + 2; line++)
             {
                 for (int sign = 0; sign < columns; sign++)
                 {
-                    playground[sign, line - 2] = rawData[line].Substring(sign, 1);
+                    Field field = new EmptyField() { Location = new System.Drawing.Point(sign, line - 2) };
+                    switch (rawData[line].Substring(sign, 1))
+                    {
+                        case ".": field = new ItemField() { Location = new System.Drawing.Point(sign, line - 2) };
+                            break;
+                        case "o":
+                            field = new ItemField() { Location = new System.Drawing.Point(sign, line - 2) };
+                            break;
+                        case "@":
+                            field = new PlayerField() { Location = new System.Drawing.Point(sign, line - 2) };
+                            break;
+                        case "#":
+                            field = new WallField() { Location = new System.Drawing.Point(sign, line - 2) };
+                            break;
+                        default:
+                            field = new EmptyField() { Location = new System.Drawing.Point(sign, line - 2) };
+                            break;
+                    }
+                    playground[sign, line - 2] = field;
                 }
             }
             return playground;

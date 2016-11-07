@@ -86,6 +86,7 @@
     <Compile Include="Pawn\IPawn.cs" />
     <Compile Include="Pawn\ManualMovingPawn.cs" />
     <Compile Include="Pawn\PawnBase.cs" />
+    <Compile Include="Playground\PawnMissingException.cs" />
     <Compile Include="Playground\PlayGround.cs" />
     <Compile Include="Playground\FieldBase.cs" />
     <Compile Include="Playground\PlaygroundVisual.cs" />

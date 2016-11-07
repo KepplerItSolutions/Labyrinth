@@ -14,15 +14,8 @@ namespace B_ESA_4
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            if (args != null && args.Length > 0)
-            {
-                Application.Run(new frmLabyrinthGame(args[args.Length - 1]));
-            }
-            else
-            {
-                MessageBox.Show("Es wurde kein Pfad angegeben!\nProgramm wird ohne Labyrinth gestartet.\nBitte laden Sie ein Labyrinth über das Menü \"Labyrinth laden\"");
-                Application.Run(new frmLabyrinthGame(""));
-            }
+            string labyrinthFile = (args != null && args.Length > 0) ? args[args.Length - 1] : null;
+            Application.Run(new frmLabyrinthGame(labyrinthFile));
         }
     }
 }

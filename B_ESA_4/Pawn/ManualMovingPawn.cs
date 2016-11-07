@@ -23,22 +23,22 @@ namespace B_ESA_4.Pawn
 
         public void MoveUp()
         {
-            Location = MovePawnAndSetUpPlayground(Location, Location.UpperNeighbour());
+            internalPlayground.MovePawnUp();
         }
 
         public void MoveDown()
         {
-            Location = MovePawnAndSetUpPlayground(Location, Location.LowerNeighbour());
+            internalPlayground.MovePawnDown();
         }
 
         public void MoveLeft()
         {
-            Location = MovePawnAndSetUpPlayground(Location, Location.LeftNeighbour());
+            internalPlayground.MovePawnLeft();
         }
 
         public void MoveRight()
         {
-            Location = MovePawnAndSetUpPlayground(Location, Location.RightNeighbour());
+            internalPlayground.MovePawnRight();
         }
 
         public void Dispose()

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Timers;
 using B_ESA_4.Playground;
+using System.Diagnostics;
 
 namespace B_ESA_4.Pawn
 {
@@ -56,7 +57,8 @@ namespace B_ESA_4.Pawn
         {
             itemPositions.Clear();
             pointsToSearch.Clear();
-            pointsToSearch.Enqueue(Location);
+            pointsToSearch.Enqueue(internalPlayground.Pawn.Location);
+
 
             while (pointsToSearch.Any())
             {
@@ -69,22 +71,22 @@ namespace B_ESA_4.Pawn
                     var leftNeighbour = p.LeftNeighbour();
                     var rightNeighbour = p.RightNeighbour();
 
-                    if (CanMove(upperNeighbour))
+                    if (internalPlayground.CanMove(upperNeighbour))
                     {
                         AddPointIfNotExistent(upperNeighbour, p);
                     }
 
-                    if (CanMove(lowerNeighbour))
+                    if (internalPlayground.CanMove(lowerNeighbour))
                     {
                         AddPointIfNotExistent(lowerNeighbour, p);
                     }
 
-                    if (CanMove(leftNeighbour))
+                    if (internalPlayground.CanMove(leftNeighbour))
                     {
                         AddPointIfNotExistent(leftNeighbour, p);
                     }
 
-                    if (CanMove(rightNeighbour))
+                    if (internalPlayground.CanMove(rightNeighbour))
                     {
                         AddPointIfNotExistent(rightNeighbour, p);
                     }
@@ -99,7 +101,7 @@ namespace B_ESA_4.Pawn
 
         private void AddPointIfNotExistent(Point neighborPoint, Point origin)
         {
-            if (itemPositions.ContainsKey(neighborPoint))
+            if (itemPositions.ContainsKey(neighborPoint) || neighborPoint == internalPlayground.Pawn.Location)
                 return;
             AddPoint(neighborPoint, origin);
         }
@@ -126,11 +128,9 @@ namespace B_ESA_4.Pawn
             while (wayFromOrigin.Any())
             {
                 Point moveToPoint = wayFromOrigin.Pop();
-
-                MovePawnAndSetUpPlayground(Location, moveToPoint);
+                internalPlayground.MovePawn(moveToPoint);
+                Debug.WriteLine("Move to: {0}, {1}", moveToPoint.X, moveToPoint.Y);
                 Thread.Sleep(1000);
-                PawnX = moveToPoint.X;
-                PawnY = moveToPoint.Y;
             }
         }
 

@@ -4,11 +4,14 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using B_ESA_4.Playground;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace B_ESA_4.Forms
 {
     public partial class frmLabyrinthGame : Form
     {
+        const int FONT_SIZE = 25;
         const int FRAMES_PER_SECOND = 60;
         const int WS_EX_COMPOSITE_ON = 0x02000000;
         const string AUTOMATIK = "Automatik";
@@ -19,6 +22,7 @@ namespace B_ESA_4.Forms
         PlayGround interalPlayground;
         IPawn internalPawn;
         string internalPathToFile;
+        private PlaygroundRenderer _playgroundRenderer;
 
         public frmLabyrinthGame(string pathToFile)
         {
@@ -75,19 +79,16 @@ namespace B_ESA_4.Forms
         {
             if (internalPawn != null)
             {
-                int x = internalPawn.PawnX;
-                int y = internalPawn.PawnY;
-
                 internalPawn.Dispose();
 
                 if (automatikToolStripMenuItem.Text == AUTOMATIK)
                 {
-                    internalPawn = new ComputerPlayer(interalPlayground, x, y);
+                    internalPawn = new ComputerPlayer(interalPlayground);
                     automatikToolStripMenuItem.Text = MANUAL;
                 }
                 else
                 {
-                    internalPawn = new ManualMovingPawn(interalPlayground, x, y);
+                    internalPawn = new ManualMovingPawn(interalPlayground);
                     automatikToolStripMenuItem.Text = AUTOMATIK;
                 }             
             }
@@ -106,7 +107,21 @@ namespace B_ESA_4.Forms
 
         private void frmLabyrinthGame_Paint(object sender, PaintEventArgs e)
         {
-            interalPlayground.PlaygroundVisual?.DrawLab(e.Graphics);
+            if (interalPlayground == null)
+                PrintString(e.Graphics, "Kein Labyrinth ausgewählt.");
+            else if(interalPlayground.StillContainsItem())
+                _playgroundRenderer?.DrawLab(e.Graphics);
+            else
+                PrintString(e.Graphics, "Ende. Alle Items beseitigt.");
+
+        }
+        private void PrintString(Graphics internalGraphic, string message)
+        {
+            internalGraphic.Clear(Color.LightGray);
+            Font drawFont = new Font("Arial", FONT_SIZE);
+            SolidBrush brush = new SolidBrush(Color.Black);
+            var size = internalGraphic.MeasureString(message, drawFont);
+            internalGraphic.DrawString(message, drawFont, brush, new PointF((this.Width - size.Width) / 2,(this.Height - size.Height) / 2));
         }
 
         private void hilfeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -127,13 +142,23 @@ namespace B_ESA_4.Forms
         {
             this.Icon = Icon.GetKepplerIcon(Application.StartupPath);
         }
+
         private void setLabyrinth()
         {
-            var lab = internalDataLoader.LoadDataFromFile(internalPathToFile);
-            interalPlayground = new PlayGround(lab);
-            internalPawn = new ManualMovingPawn(interalPlayground);
-            this.Height = interalPlayground.PlaygroundVisual?.Size.Height ?? this.Height;
-            this.Width = interalPlayground.PlaygroundVisual?.Size.Width ?? this.Width;
+            try
+            {
+                if (String.IsNullOrWhiteSpace(internalPathToFile))
+                    return;
+                var lab = internalDataLoader.LoadDataFromFile(internalPathToFile);
+                interalPlayground = new PlayGround(lab);
+                _playgroundRenderer = new PlaygroundRenderer(interalPlayground);
+                internalPawn = new ManualMovingPawn(interalPlayground);
+                this.Height = _playgroundRenderer?.Size.Height ?? this.Height;
+                this.Width = _playgroundRenderer?.Size.Width ?? this.Width;
+            }catch(PawnMissingException exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
     }
 }

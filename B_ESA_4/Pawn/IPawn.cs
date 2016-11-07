@@ -1,4 +1,6 @@
-﻿namespace B_ESA_4.Pawn
+﻿using System.Drawing;
+
+namespace B_ESA_4.Pawn
 {
     public interface IPawn
     {
@@ -7,7 +9,5 @@
         void MoveLeft();
         void MoveRight();
         void Dispose();  
-        int PawnX { get; set; }
-        int PawnY { get; set; }
     }
 }
