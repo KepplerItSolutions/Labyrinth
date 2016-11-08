@@ -5,7 +5,7 @@ namespace B_ESA_4.Playground
     public class PlayGround 
     {
         public Field Pawn { get; private set; }
-        private Field[,] _playgroundData { get; set; }
+        private Field[,] PlaygroundData { get; set; }
 
         public int Width { get; private set; }
         public int Height { get; private set; }
@@ -13,19 +13,19 @@ namespace B_ESA_4.Playground
 
         public PlayGround(Field[,] playgroundData)
         {
-            _playgroundData = playgroundData;
+            PlaygroundData = playgroundData;
             if (!FindPawn())
                 throw new PawnMissingException();
-            Width = _playgroundData.GetLength(0);
-            Height = _playgroundData.GetLength(1);
+            Width = PlaygroundData.GetLength(0);
+            Height = PlaygroundData.GetLength(1);
         }
         private bool FindPawn()
         {
-            for (int column = 0; column < _playgroundData.GetLength(0); column++)
+            for (int column = 0; column < PlaygroundData.GetLength(0); column++)
             {
-                for (int row = 0; row < _playgroundData.GetLength(1); row++)
+                for (int row = 0; row < PlaygroundData.GetLength(1); row++)
                 {
-                    var pawn = _playgroundData[column, row] as PlayerField;
+                    var pawn = PlaygroundData[column, row] as PlayerField;
                     if (pawn != null)
                     {
                         Pawn = pawn;
@@ -39,11 +39,11 @@ namespace B_ESA_4.Playground
         public bool StillContainsItem()
         {
             bool result = false;
-            for (int column = 0; column < _playgroundData.GetLength(0); column++)
+            for (int column = 0; column < PlaygroundData.GetLength(0); column++)
             {
-                for (int row = 0; row < _playgroundData.GetLength(1); row++)
+                for (int row = 0; row < PlaygroundData.GetLength(1); row++)
                 {
-                    if (_playgroundData[column, row] is ItemField)
+                    if (PlaygroundData[column, row] is ItemField)
                     {
                         result = true;
                     }
@@ -60,8 +60,8 @@ namespace B_ESA_4.Playground
 
         public Field this[int x, int y]
         {
-            get { return _playgroundData[x, y]; }
-            set { _playgroundData[x, y] = value; }
+            get { return PlaygroundData[x, y]; }
+            set { PlaygroundData[x, y] = value; }
         }
 
         public bool CanMove(int newX, int newY)

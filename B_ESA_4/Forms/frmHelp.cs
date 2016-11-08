@@ -6,9 +6,9 @@ using System.IO;
 
 namespace B_ESA_4.Forms
 {
-    public partial class frmHelp : Form
+    public partial class FrmHelp : Form
     {
-        public frmHelp()
+        public FrmHelp()
         {
             InitializeComponent();
         }
@@ -25,7 +25,7 @@ namespace B_ESA_4.Forms
             {
                 richTextBox1.Text = "Hilfedatei nicht gefunden.\nPfad: " + help;
             }
-            this.Icon = Icon.GetKepplerIcon(Application.StartupPath);
+            Icon = Icon.GetKepplerIcon(Application.StartupPath);
         }
     }
 }

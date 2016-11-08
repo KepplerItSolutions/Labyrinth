@@ -1,6 +1,6 @@
 ﻿namespace B_ESA_4.Forms
 {
-    partial class frmAutor
+    partial class FrmAutor
     {
         /// <summary>
         /// Required designer variable.
@@ -62,7 +62,7 @@
             this.ClientSize = new System.Drawing.Size(636, 465);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "frmAutor";
+            this.Name = "FrmAutor";
             this.Text = "Autor";
             this.Load += new System.EventHandler(this.frmAutor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

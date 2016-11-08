@@ -23,22 +23,22 @@ namespace B_ESA_4.Pawn
 
         public void MoveUp()
         {
-            internalPlayground.MovePawnUp();
+            InternalPlayground.MovePawnUp();
         }
 
         public void MoveDown()
         {
-            internalPlayground.MovePawnDown();
+            InternalPlayground.MovePawnDown();
         }
 
         public void MoveLeft()
         {
-            internalPlayground.MovePawnLeft();
+            InternalPlayground.MovePawnLeft();
         }
 
         public void MoveRight()
         {
-            internalPlayground.MovePawnRight();
+            InternalPlayground.MovePawnRight();
         }
 
         public void Dispose()

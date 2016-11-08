@@ -15,7 +15,7 @@ namespace B_ESA_4
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             string labyrinthFile = (args != null && args.Length > 0) ? args[args.Length - 1] : null;
-            Application.Run(new frmLabyrinthGame(labyrinthFile));
+            Application.Run(new FrmLabyrinthGame(labyrinthFile));
         }
     }
 }

@@ -9,7 +9,7 @@ namespace B_ESA_4.Pawn
 {
     public abstract class PawnBase
     {
-        protected PlayGround internalPlayground;
+        protected PlayGround InternalPlayground;
 
         public PawnBase(PlayGround playground)
         {
@@ -18,7 +18,7 @@ namespace B_ESA_4.Pawn
 
         private void InitPawn(PlayGround playground)
         {
-            internalPlayground = playground;
+            InternalPlayground = playground;
         }
 
         public PawnBase(PlayGround playground, int x, int y)
