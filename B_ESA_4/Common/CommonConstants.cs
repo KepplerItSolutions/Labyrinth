@@ -3,9 +3,9 @@
     public static class CommonConstants
     {
         public const int ONE_SECOND = 1000;
-        public const string Sign = "@";
-        public const string ItemSign = "o";
-        public const string Wall = "#";
-        public const string Point = ".";        
+        public const string SIGN = "@";
+        public const string ITEM_SIGN = "o";
+        public const string WALL = "#";
+        public const string POINT = ".";        
     }
 }

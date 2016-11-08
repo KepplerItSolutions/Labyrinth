@@ -6,16 +6,16 @@ using System.IO;
 
 namespace B_ESA_4.Forms
 {
-    public partial class frmAutor : Form
+    public partial class FrmAutor : Form
     {
-        public frmAutor()
+        public FrmAutor()
         {
             InitializeComponent();
         }
 
         private void frmAutor_Load(object sender, EventArgs e)
         {
-            this.Icon = Icon.GetKepplerIcon(Application.StartupPath);
+            Icon = Icon.GetKepplerIcon(Application.StartupPath);
 
             string impressum = Application.StartupPath + "\\Impressum.png";
             string slogan = Application.StartupPath + "\\SloganMitIconTransparentCCD - ohne we're.png";

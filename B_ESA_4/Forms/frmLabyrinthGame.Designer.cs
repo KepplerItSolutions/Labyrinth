@@ -1,6 +1,6 @@
 ﻿namespace B_ESA_4.Forms
 {
-    partial class frmLabyrinthGame
+    partial class FrmLabyrinthGame
     {
         /// <summary>
         /// Required designer variable.
@@ -104,7 +104,7 @@
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "frmLabyrinthGame";
+            this.Name = "FrmLabyrinthGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Labyrinth";
             this.Load += new System.EventHandler(this.frmLabyrinthGame_Load);

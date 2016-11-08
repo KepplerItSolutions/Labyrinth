@@ -22,20 +22,20 @@ namespace B_ESA_3
 
         }
 
-        private void ZeichneBezier(int n, Point P1, Point P2, Point P3, Graphics graphicArea)
+        private void ZeichneBezier(int n, Point P1, Point p2, Point p3, Graphics graphicArea)
         {
             if (n == 0)
             {                
-                graphicArea.DrawLine(Pens.Red, P1.xValue, P1.yValue, P2.xValue, P2.yValue);
-                graphicArea.DrawLine(Pens.Red, P2.xValue, P2.yValue, P3.xValue, P3.yValue);
+                graphicArea.DrawLine(Pens.Red, P1.xValue, P1.yValue, p2.xValue, p2.yValue);
+                graphicArea.DrawLine(Pens.Red, p2.xValue, p2.yValue, p3.xValue, p3.yValue);
             }
             else
             {
-                Point P12 = P1 + P2;
+                Point P12 = P1 + p2;
                 P12.xValue *= 0.5f;
                 P12.yValue *= 0.5f;
 
-                Point P23 = P2 + P3;
+                Point P23 = p2 + p3;
                 P23.xValue *= 0.5f;
                 P23.yValue *= 0.5f;
 
@@ -44,7 +44,7 @@ namespace B_ESA_3
                 P123.yValue *= 0.5f;
 
                 ZeichneBezier(n - 1, P1, P12, P123, graphicArea);
-                ZeichneBezier(n - 1, P123, P23, P3, graphicArea);
+                ZeichneBezier(n - 1, P123, P23, p3, graphicArea);
             }
         }
 

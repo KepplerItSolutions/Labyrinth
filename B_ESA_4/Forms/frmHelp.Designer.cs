@@ -1,6 +1,6 @@
 ﻿namespace B_ESA_4.Forms
 {
-    partial class frmHelp
+    partial class FrmHelp
     {
         /// <summary>
         /// Required designer variable.
@@ -46,7 +46,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(578, 527);
             this.Controls.Add(this.richTextBox1);
-            this.Name = "frmHelp";
+            this.Name = "FrmHelp";
             this.Text = "Hilfe";
             this.Load += new System.EventHandler(this.frmHelp_Load);
             this.ResumeLayout(false);
