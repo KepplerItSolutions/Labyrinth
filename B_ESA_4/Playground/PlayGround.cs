@@ -64,17 +64,14 @@ namespace B_ESA_4.Playground
             get { return PlaygroundData[x, y]; }
             set { PlaygroundData[x, y] = value; }
         }
-
-        public bool CanMove(int newX, int newY)
-        {
-            return !(this[newX, newY] is WallField); 
-            //TODO: check ob auch nur ein Feld weit
-            //TODO: Check ob an Spielfeldgrenze
-        }
+        
 
         public bool CanMove(Point p)
         {
-            return CanMove(p.X, p.Y);
+            return !(this[p.X, p.Y] is WallField)
+                   && Pawn.Location.SquareDistance(p) == 1
+                   && p.Y >= 0 && p.Y < Height
+                   && p.X >= 0 && p.X < Width;
         }
 
         public void MovePawnUp()
