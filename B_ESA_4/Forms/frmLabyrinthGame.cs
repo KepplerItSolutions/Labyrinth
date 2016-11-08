@@ -151,13 +151,20 @@ namespace B_ESA_4.Forms
                 if (String.IsNullOrWhiteSpace(_pathToFile))
                     return;
                 var lab = _dataLoader.LoadDataFromFile(_pathToFile);
-                _playground = new PlayGround(lab);
-                _playgroundRenderer = new PlaygroundRenderer(_playground);
-                _pawn = new ManualMovingPawn(_playground);
-                Height = _playgroundRenderer.Size.Height;
-                Width = _playgroundRenderer.Size.Width;
-            }
+                if (lab != null)
+                {
+                    _playground = new PlayGround(lab);
+                    _playgroundRenderer = new PlaygroundRenderer(_playground);
+                    _pawn = new ManualMovingPawn(_playground);
+                    Height = _playgroundRenderer.Size.Height;
+                    Width = _playgroundRenderer.Size.Width;
+
+                }            }
             catch (PawnMissingException exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            catch (InvalidFormatException exception)
             {
                 MessageBox.Show(exception.Message);
             }

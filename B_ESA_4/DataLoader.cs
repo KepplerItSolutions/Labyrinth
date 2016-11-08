@@ -1,6 +1,7 @@
 ﻿using B_ESA_4.Playground;
 using System;
 using System.IO;
+using B_ESA_4.Common;
 using B_ESA_4.Playground.Fields;
 
 namespace B_ESA_4
@@ -30,8 +31,7 @@ namespace B_ESA_4
             {
                 return SetDataToPlayGround(result);
             }
-            System.Windows.Forms.MessageBox.Show("Das Format der angegebnene Datei ist nicht korrekt");
-            return null;          
+            throw new InvalidFormatException();
         }
 
         private bool IsCorrectFormat(string[] dataToCheck)
@@ -47,7 +47,7 @@ namespace B_ESA_4
 
             result = int.TryParse(dataToCheck[0], out columns) && int.TryParse(dataToCheck[1], out rows);
 
-            if (result && !(dataToCheck.Length == rows + 2))
+            if (result && dataToCheck.Length != rows + 2)
             {
                 return false;
             }
@@ -77,15 +77,15 @@ namespace B_ESA_4
                     Field field = new EmptyField() { Location = new System.Drawing.Point(sign, line - 2) };
                     switch (rawData[line].Substring(sign, 1))
                     {
-                        case ".": field = new ItemField() { Location = new System.Drawing.Point(sign, line - 2) };
+                        case CommonConstants.POINT: field = new ItemField() { Location = new System.Drawing.Point(sign, line - 2) };
                             break;
-                        case "o":
+                        case CommonConstants.ITEM_SIGN:
                             field = new ItemField() { Location = new System.Drawing.Point(sign, line - 2) };
                             break;
-                        case "@":
+                        case CommonConstants.PAWN:
                             field = new PlayerField() { Location = new System.Drawing.Point(sign, line - 2) };
                             break;
-                        case "#":
+                        case CommonConstants.WALL:
                             field = new WallField() { Location = new System.Drawing.Point(sign, line - 2) };
                             break;
                         default:

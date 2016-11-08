@@ -82,6 +82,7 @@
     <Compile Include="Forms\frmLabyrinthGame.Designer.cs">
       <DependentUpon>frmLabyrinthGame.cs</DependentUpon>
     </Compile>
+    <Compile Include="InvalidFormatException.cs" />
     <Compile Include="Pawn\ComputerPlayer.cs" />
     <Compile Include="Pawn\IPawn.cs" />
     <Compile Include="Pawn\ManualMovingPawn.cs" />
@@ -115,23 +116,23 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="errorLab.dat">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="Labyrinths\errorLab.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Help.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="labyrinth1.dat">
+    <None Include="Labyrinths\labyrinth1.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="labyrinth2.dat">
+    <None Include="Labyrinths\labyrinth2.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="labyrinth3.dat">
+    <None Include="Labyrinths\labyrinth3.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="maze.dat">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="Labyrinths\maze.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
