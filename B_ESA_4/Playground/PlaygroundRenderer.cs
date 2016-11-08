@@ -32,6 +32,10 @@ namespace B_ESA_4.Playground
                     {
                         brush = new SolidBrush(Color.Green);
                     }
+                    else if (_playGround[column,row] is WallField)
+                    {
+                        brush = new SolidBrush(Color.Black);
+                    }
                     graphics.DrawString(_playGround[column, row].Symbol.ToString(), 
                         drawFont, 
                         brush, 
