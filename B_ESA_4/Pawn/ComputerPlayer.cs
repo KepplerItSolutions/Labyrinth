@@ -62,15 +62,14 @@ namespace B_ESA_4.Pawn
                 Point p = pointsToSearch.Dequeue();
 
                 if (!IsItem(p))
-                {
-                    var upperNeighbour = p.UpperNeighbor();                    
+                {                                       
                     var lowerNeighbour = p.LowerNeighbor();
                     var leftNeighbour = p.LeftNeighbor();
                     var rightNeighbour = p.RightNeighbor();
                     
-                    if (CanMove(upperNeighbour))
+                    if (CanMove(p.UpperNeighbor()))
                     {
-                        AddPointIfNotExistent(upperNeighbour, p);
+                        AddPointIfNotExistent(p.UpperNeighbor(), p);
                     }
                     
                     if (CanMove(lowerNeighbour))
