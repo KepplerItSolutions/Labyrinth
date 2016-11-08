@@ -102,15 +102,10 @@ namespace B_ESA_4.Pawn
 
         private void AddPointIfNotExistent(Point neighborPoint, Point origin)
         {
-            if (_itemPositions.ContainsKey(neighborPoint) || neighborPoint == InternalPlayground.Pawn.Location)
+            if(itemPositions.ContainsKey(neighborPoint))
                 return;
-            AddPoint(neighborPoint, origin);
-        }
-
-        private void AddPoint(Point neighborPoint, Point origin)
-        {
-            _itemPositions.Add(neighborPoint, origin);
-            _pointsToSearch.Enqueue(neighborPoint);
+            itemPositions.Add(neighborPoint, origin);
+            pointsToSearch.Enqueue(neighborPoint);
         }
 
         private void CreatePath(Point itemPosition)
