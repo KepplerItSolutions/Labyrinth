@@ -129,16 +129,11 @@ namespace B_ESA_4.Pawn
             while (wayFromOrigin.Any())
             {
                 Point moveToPoint = wayFromOrigin.Pop();
-                Debug.WriteLine("Move to: {0}, {1}  (distance: {2})", moveToPoint.X, moveToPoint.Y, SquareDistance(internalPlayground.Pawn.Location, moveToPoint));
                 internalPlayground.MovePawn(moveToPoint);
                 Thread.Sleep(1000);
             }
         }
-
-        private int SquareDistance(Point from, Point to)
-        {
-           return ((to.X - from.X)*(to.X - from.X) + (to.Y - from.Y)*(to.Y - from.Y));
-        }
+        
         private bool IsItem(Point p)
         {
             return internalPlayground[p] is ItemField;
