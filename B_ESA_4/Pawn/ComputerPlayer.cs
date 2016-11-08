@@ -117,23 +117,28 @@ namespace B_ESA_4.Pawn
             Stack<Point> wayFromOrigin = new Stack<Point>();
 
             wayFromOrigin.Push(itemPosition);
-            Point fromPoint = (Point)itemPositions[itemPosition];
+            Point fromPoint = itemPosition;
 
             while (itemPositions.ContainsKey(fromPoint))
             {
                 fromPoint = (Point)itemPositions[fromPoint];
-                wayFromOrigin.Push(fromPoint);
+                if(fromPoint != internalPlayground.Pawn.Location)
+                    wayFromOrigin.Push(fromPoint);
             }
 
             while (wayFromOrigin.Any())
             {
                 Point moveToPoint = wayFromOrigin.Pop();
+                Debug.WriteLine("Move to: {0}, {1}  (distance: {2})", moveToPoint.X, moveToPoint.Y, SquareDistance(internalPlayground.Pawn.Location, moveToPoint));
                 internalPlayground.MovePawn(moveToPoint);
-                Debug.WriteLine("Move to: {0}, {1}", moveToPoint.X, moveToPoint.Y);
                 Thread.Sleep(1000);
             }
         }
 
+        private int SquareDistance(Point from, Point to)
+        {
+           return ((to.X - from.X)*(to.X - from.X) + (to.Y - from.Y)*(to.Y - from.Y));
+        }
         private bool IsItem(Point p)
         {
             return internalPlayground[p] is ItemField;
