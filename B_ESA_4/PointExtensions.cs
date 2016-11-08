@@ -27,7 +27,7 @@ namespace B_ESA_4
         public static int SquareDistance(this Point p1, Point p2)
         {
             var distX = (p2.X - p1.X);
-            var distY = (p2.Y - p2.Y);
+            var distY = (p2.Y - p1.Y);
             return distX*distX + distY*distY;
         }
     }
