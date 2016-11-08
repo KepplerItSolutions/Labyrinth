@@ -8,6 +8,7 @@ using System.Threading;
 using System.Timers;
 using B_ESA_4.Playground;
 using System.Diagnostics;
+using B_ESA_4.Playground.Fields;
 
 namespace B_ESA_4.Pawn
 {

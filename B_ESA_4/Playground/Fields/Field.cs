@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace B_ESA_4.Playground
+namespace B_ESA_4.Playground.Fields
 {
     public abstract class Field
     {
