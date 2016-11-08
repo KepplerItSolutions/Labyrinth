@@ -63,7 +63,7 @@ namespace B_ESA_4.Pawn
 
                 if (!IsItem(p))
                 {                                       
-                    var lowerNeighbour = p.LowerNeighbor();
+                    //var lowerNeighbour = p.LowerNeighbor();
                     var leftNeighbour = p.LeftNeighbor();
                     var rightNeighbour = p.RightNeighbor();
                     
@@ -72,9 +72,9 @@ namespace B_ESA_4.Pawn
                         AddPointIfNotExistent(p.UpperNeighbor(), p);
                     }
                     
-                    if (CanMove(lowerNeighbour))
+                    if (CanMove(p.LowerNeighbor()))
                     {
-                        AddPointIfNotExistent(lowerNeighbour, p);
+                        AddPointIfNotExistent(p.LowerNeighbor(), p);
                     }
                     
                     if (CanMove(leftNeighbour))
