@@ -31,8 +31,7 @@ namespace B_ESA_4
             {
                 return SetDataToPlayGround(result);
             }
-            System.Windows.Forms.MessageBox.Show("Das Format der angegebnene Datei ist nicht korrekt");
-            return null;          
+            throw new InvalidFormatException();
         }
 
         private bool IsCorrectFormat(string[] dataToCheck)

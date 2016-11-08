@@ -161,6 +161,10 @@ namespace B_ESA_4.Forms
             {
                 MessageBox.Show(exception.Message);
             }
+            catch (InvalidFormatException exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
     }
 }
