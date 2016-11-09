@@ -18,6 +18,30 @@ namespace B_ESA_4.Playground
                                 (FONT_SIZE + DISTANCE_BETWEEN_SIGNS)*_playGround.Height + 4 * OFFSET_ROW);
         }
 
+        public PlaygroundRenderer(Size windowSize)
+        {
+            Size = windowSize;
+        }
+
+        public void UpDatePlayground(Graphics e)
+        {
+            if (_playGround == null)
+                PrintString(e, "Kein Labyrinth ausgewählt.");
+            else if (_playGround.StillContainsItem())
+                DrawLab(e);
+            else
+                PrintString(e, "Ende. Alle Items beseitigt.");
+        }
+
+        private void PrintString(Graphics graphics, string message)
+        {
+            graphics.Clear(Color.LightGray);
+            Font drawFont = new Font("Arial", FONT_SIZE);
+            SolidBrush brush = new SolidBrush(Color.Black);
+            var size = graphics.MeasureString(message, drawFont);
+            graphics.DrawString(message, drawFont, brush, new PointF((this.Size.Width - size.Width) / 2, (this.Size.Height - size.Height) / 2));
+        }
+
         public void DrawLab(Graphics graphics)
         {
             graphics.Clear(Color.LightGray);

@@ -108,21 +108,16 @@ namespace B_ESA_4.Forms
 
         private void frmLabyrinthGame_Paint(object sender, PaintEventArgs e)
         {
-            if (_playground == null)
-                PrintString(e.Graphics, "Kein Labyrinth ausgewählt.");
-            else if (_playground.StillContainsItem())
-                _playgroundRenderer?.DrawLab(e.Graphics);
+            _playgroundRenderer?.UpDatePlayground(e.Graphics);
+            if (_playground != null)
+            {
+                tlStrpPoints.Text = _playground.Points.ToString();
+                tlStrpSteps.Text = _playground.Steps.ToString();
+            }
             else
-                PrintString(e.Graphics, "Ende. Alle Items beseitigt.");
-
-        }
-        private void PrintString(Graphics graphics, string message)
-        {
-            graphics.Clear(Color.LightGray);
-            Font drawFont = new Font("Arial", FONT_SIZE);
-            SolidBrush brush = new SolidBrush(Color.Black);
-            var size = graphics.MeasureString(message, drawFont);
-            graphics.DrawString(message, drawFont, brush, new PointF((Width - size.Width) / 2, (Height - size.Height) / 2));
+            {
+                //_playgroundRenderer?.PrintString(e.Graphics, "Kein Labyrinth ausgewählt.");
+            }
         }
 
         private void hilfeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -148,19 +143,22 @@ namespace B_ESA_4.Forms
         {
             try
             {
-                if (String.IsNullOrWhiteSpace(_pathToFile))
-                    return;
-                var lab = _dataLoader.LoadDataFromFile(_pathToFile);
-                if (lab != null)
+                if (!String.IsNullOrWhiteSpace(_pathToFile))
                 {
-                    _playground = new PlayGround(lab);
-                    _playgroundRenderer = new PlaygroundRenderer(_playground);
-                    _pawn = new ManualMovingPawn(_playground);
-                    automatikToolStripMenuItem.Text = AUTOMATIK;
-                    Height = _playgroundRenderer.Size.Height;
-                    Width = _playgroundRenderer.Size.Width;
-
-                }            }
+                    var lab = _dataLoader.LoadDataFromFile(_pathToFile);
+                    if (lab != null)
+                    {
+                        _playground = new PlayGround(lab);
+                        _playgroundRenderer = new PlaygroundRenderer(_playground);
+                        _pawn = new ManualMovingPawn(_playground);
+                        automatikToolStripMenuItem.Text = AUTOMATIK;
+                        Height = _playgroundRenderer.Size.Height;
+                        Width = _playgroundRenderer.Size.Width;
+                        return;
+                    }
+                }
+                _playgroundRenderer = new PlaygroundRenderer(this.Size);
+            }
             catch (PawnMissingException exception)
             {
                 MessageBox.Show(exception.Message);
