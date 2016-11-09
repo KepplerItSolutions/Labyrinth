@@ -65,7 +65,7 @@ namespace B_ESA_4.Pawn
             {
                 Point p = _pointsToSearch.Dequeue();
 
-                if (!IsItem(p))
+                if (!InternalPlayground.IsItem(p))
                 {
                     var upperNeighbour = p.UpperNeighbour();
                     var lowerNeighbour = p.LowerNeighbour();
@@ -128,12 +128,7 @@ namespace B_ESA_4.Pawn
                 InternalPlayground.MovePawn(moveToPoint);
                 Thread.Sleep(1000);
             }
-        }
-        
-        private bool IsItem(Point p)
-        {
-            return InternalPlayground[p] is ItemField;
-        }
+        }       
 
         public void MoveUp()
         {

@@ -10,7 +10,20 @@ namespace B_ESA_4.Playground
 
         public int Width { get; private set; }
         public int Height { get; private set; }
-        
+
+        public int Steps { get; private set; }        
+
+        public int Bonus { get { return (int)(_points * (4 / (float)Steps)); } }
+        public int Points
+        {
+            get
+            {
+                if (StillContainsItem())                
+                    return _points;
+                return _points + Bonus;
+            }
+        }
+        int _points = 0;
 
         public PlayGround(Field[,] playgroundData)
         {
@@ -20,6 +33,7 @@ namespace B_ESA_4.Playground
             Width = PlaygroundData.GetLength(0);
             Height = PlaygroundData.GetLength(1);
         }
+
         private bool FindPawn()
         {
             for (int column = 0; column < PlaygroundData.GetLength(0); column++)
@@ -79,6 +93,11 @@ namespace B_ESA_4.Playground
                    && p.X >= 0 && p.X < Width;
         }
 
+        public bool IsItem(Point p)
+        {
+            return this[p] is ItemField;
+        }
+
         public void MovePawnUp()
         {
             MovePawn(Pawn.Location.UpperNeighbour());
@@ -98,12 +117,15 @@ namespace B_ESA_4.Playground
             MovePawn(Pawn.Location.RightNeighbour());
         }
 
-
         public void MovePawn(Point next)
         {
             if (!CanMove(next))
                 return;
 
+            if (IsItem(next))
+                _points += 10;
+
+            Steps++;
             this[Pawn.Location] = new EmptyField() { Location = Pawn.Location };
             Pawn = new PlayerField() { Location = next };
             this[next] = Pawn;
