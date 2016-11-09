@@ -115,7 +115,7 @@ namespace B_ESA_4.Pawn
             wayFromOrigin.Push(itemPosition);
             Point fromPoint = itemPosition;
 
-            while (_itemPositions.ContainsKey(fromPoint))
+            while (fromPoint != InternalPlayground.Pawn.Location)
             {
                 fromPoint = (Point)_itemPositions[fromPoint];
                 if(fromPoint != InternalPlayground.Pawn.Location)
