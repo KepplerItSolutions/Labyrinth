@@ -72,22 +72,22 @@ namespace B_ESA_4.Pawn
                     var leftNeighbour = p.LeftNeighbour();
                     var rightNeighbour = p.RightNeighbour();
 
-                    if (InternalPlayground.CanMove(upperNeighbour))
+                    if (InternalPlayground.FieldAccessible(upperNeighbour))
                     {
                         AddPointIfNotExistent(upperNeighbour, p);
                     }
 
-                    if (InternalPlayground.CanMove(lowerNeighbour))
+                    if (InternalPlayground.FieldAccessible(lowerNeighbour))
                     {
                         AddPointIfNotExistent(lowerNeighbour, p);
                     }
 
-                    if (InternalPlayground.CanMove(leftNeighbour))
+                    if (InternalPlayground.FieldAccessible(leftNeighbour))
                     {
                         AddPointIfNotExistent(leftNeighbour, p);
                     }
 
-                    if (InternalPlayground.CanMove(rightNeighbour))
+                    if (InternalPlayground.FieldAccessible(rightNeighbour))
                     {
                         AddPointIfNotExistent(rightNeighbour, p);
                     }

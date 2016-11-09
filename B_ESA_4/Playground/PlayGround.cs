@@ -68,8 +68,13 @@ namespace B_ESA_4.Playground
 
         public bool CanMove(Point p)
         {
-            return !(this[p.X, p.Y] is WallField)
-                   && Pawn.Location.SquareDistance(p) >= 1
+            return Pawn.Location.SquareDistance(p) == 1
+                   && FieldAccessible(p);
+        }
+
+        public bool FieldAccessible(Point p)
+        {
+            return !(this[p.X, p.Y] is WallField)                   
                    && p.Y >= 0 && p.Y < Height
                    && p.X >= 0 && p.X < Width;
         }

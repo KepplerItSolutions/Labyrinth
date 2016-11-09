@@ -156,6 +156,7 @@ namespace B_ESA_4.Forms
                     _playground = new PlayGround(lab);
                     _playgroundRenderer = new PlaygroundRenderer(_playground);
                     _pawn = new ManualMovingPawn(_playground);
+                    automatikToolStripMenuItem.Text = AUTOMATIK;
                     Height = _playgroundRenderer.Size.Height;
                     Width = _playgroundRenderer.Size.Width;
 
