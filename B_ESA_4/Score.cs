@@ -33,11 +33,11 @@ namespace B_ESA_4
         }
         private void handleItemCollected(ItemCollectedEvent collectedEvent)
         {
-            Points++;
+            Points += 10;
         }
         private void handleAllItemsCollected(AllItemsCollectedEvent collectedEvent)
         {
-            Points = Points + calculateBonus();
+            Points += calculateBonus();
         }
         private int calculateBonus()
         {

@@ -21,6 +21,7 @@ namespace B_ESA_4.Forms
         readonly Timer _renderTimer;
         readonly DataLoader _dataLoader;
         PlayGround _playground;
+        private Score _score;
         IPawn _pawn;
         string _pathToFile;
         private PlaygroundRenderer _playgroundRenderer;
@@ -109,14 +110,10 @@ namespace B_ESA_4.Forms
         private void frmLabyrinthGame_Paint(object sender, PaintEventArgs e)
         {
             _playgroundRenderer?.UpDatePlayground(e.Graphics);
-            if (_playground != null)
+            if (_playground != null && _score != null)
             {
-                tlStrpPoints.Text = _playground.Points.ToString();
-                tlStrpSteps.Text = _playground.Steps.ToString();
-            }
-            else
-            {
-                //_playgroundRenderer?.PrintString(e.Graphics, "Kein Labyrinth ausgewählt.");
+                tlStrpPoints.Text = _score.Points.ToString();
+                tlStrpSteps.Text = _score.Steps.ToString();
             }
         }
 
@@ -148,6 +145,9 @@ namespace B_ESA_4.Forms
                     var lab = _dataLoader.LoadDataFromFile(_pathToFile);
                     if (lab != null)
                     {
+                        _score?.Dispose();
+                        _score = new Score();
+
                         _playground = new PlayGround(lab);
                         _playgroundRenderer = new PlaygroundRenderer(_playground);
                         _pawn = new ManualMovingPawn(_playground);

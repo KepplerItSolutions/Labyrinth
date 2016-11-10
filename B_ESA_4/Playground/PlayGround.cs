@@ -49,7 +49,6 @@ namespace B_ESA_4.Playground
                     }
                 }
             }
-            MyEventStream.Instance.Push(new AllItemsCollectedEvent());
             return false;
         }
 
@@ -111,6 +110,8 @@ namespace B_ESA_4.Playground
             if (IsItem(next))
             {
                 MyEventStream.Instance.Push(new ItemCollectedEvent());
+                if(!StillContainsItem())
+                    MyEventStream.Instance.Push(new AllItemsCollectedEvent());
             }
             
             this[Pawn.Location] = new EmptyField() { Location = Pawn.Location };
