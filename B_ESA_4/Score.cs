@@ -21,25 +21,25 @@ namespace B_ESA_4
         {
             _subscriptions = new CompositeDisposable
             {
-                MyEventStream.Instance.Of<PawnMovedEvent>().Subscribe(handlePawnMoved),
-                MyEventStream.Instance.Of<ItemCollectedEvent>().Subscribe(handleItemCollected),
-                MyEventStream.Instance.Of<AllItemsCollectedEvent>().Subscribe(handleAllItemsCollected)
+                MyEventStream.Instance.Of<PawnMovedEvent>().Subscribe(HandlePawnMoved),
+                MyEventStream.Instance.Of<ItemCollectedEvent>().Subscribe(HandleItemCollected),
+                MyEventStream.Instance.Of<AllItemsCollectedEvent>().Subscribe(HandleAllItemsCollected)
             };
         }
 
-        private void handlePawnMoved(PawnMovedEvent movedEvent)
+        private void HandlePawnMoved(PawnMovedEvent movedEvent)
         {
             Steps++;
         }
-        private void handleItemCollected(ItemCollectedEvent collectedEvent)
+        private void HandleItemCollected(ItemCollectedEvent collectedEvent)
         {
             Points += 10;
         }
-        private void handleAllItemsCollected(AllItemsCollectedEvent collectedEvent)
+        private void HandleAllItemsCollected(AllItemsCollectedEvent collectedEvent)
         {
-            Points += calculateBonus();
+            Points += CalculateBonus();
         }
-        private int calculateBonus()
+        private int CalculateBonus()
         {
             return (int)(Points * (4 / (float)Steps));
         }
