@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using B_ESA_4.EventStream;
 using B_ESA_4.Playground.Fields;
 
 namespace B_ESA_4.Playground
@@ -123,12 +124,24 @@ namespace B_ESA_4.Playground
                 return;
 
             if (IsItem(next))
+            {
+                MyEventStream.Instance.Push(new ItemCollectedEvent());
                 _points += 10;
+            }
 
             Steps++;
             this[Pawn.Location] = new EmptyField() { Location = Pawn.Location };
             Pawn = new PlayerField() { Location = next };
             this[next] = Pawn;
+            MyEventStream.Instance.Push(new PawnMovedEvent());
         }
-    }  
+    }
+
+    public class PawnMovedEvent
+    {
+    }
+
+    public class ItemCollectedEvent
+    {
+    }
 }
