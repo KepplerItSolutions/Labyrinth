@@ -93,6 +93,8 @@
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\IconExtension.cs" />
     <Compile Include="DataLoader.cs" />
+    <Compile Include="EventStream\EventStream.cs" />
+    <Compile Include="EventStream\IEventStream.cs" />
     <Compile Include="Forms\frmAutor.cs">
       <SubType>Form</SubType>
     </Compile>
