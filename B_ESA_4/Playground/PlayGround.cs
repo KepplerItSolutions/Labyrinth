@@ -8,24 +8,9 @@ namespace B_ESA_4.Playground
     {
         public Field Pawn { get; private set; }
         private Field[,] PlaygroundData { get; set; }
-
         public int Width { get; private set; }
         public int Height { get; private set; }
-
-        public int Steps { get; private set; }        
-
-        public int Bonus { get { return (int)(_points * (4 / (float)Steps)); } }
-        public int Points
-        {
-            get
-            {
-                if (StillContainsItem())                
-                    return _points;
-                return _points + Bonus;
-            }
-        }
-        int _points = 0;
-
+        
         public PlayGround(Field[,] playgroundData)
         {
             PlaygroundData = playgroundData;
@@ -54,18 +39,18 @@ namespace B_ESA_4.Playground
 
         public bool StillContainsItem()
         {
-            bool result = false;
             for (int column = 0; column < PlaygroundData.GetLength(0); column++)
             {
                 for (int row = 0; row < PlaygroundData.GetLength(1); row++)
                 {
                     if (PlaygroundData[column, row] is ItemField)
                     {
-                        result = true;
+                        return true;
                     }
                 }
             }
-            return result;
+            MyEventStream.Instance.Push(new AllItemsCollectedEvent());
+            return false;
         }
 
         public Field this[Point location]
@@ -126,15 +111,17 @@ namespace B_ESA_4.Playground
             if (IsItem(next))
             {
                 MyEventStream.Instance.Push(new ItemCollectedEvent());
-                _points += 10;
             }
-
-            Steps++;
+            
             this[Pawn.Location] = new EmptyField() { Location = Pawn.Location };
             Pawn = new PlayerField() { Location = next };
             this[next] = Pawn;
             MyEventStream.Instance.Push(new PawnMovedEvent());
         }
+    }
+
+    public class AllItemsCollectedEvent
+    {
     }
 
     public class PawnMovedEvent
